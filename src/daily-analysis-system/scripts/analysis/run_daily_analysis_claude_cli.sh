@@ -6,14 +6,14 @@
 #   生成三類獨立的分析報告,分析順序經過優化以提供最全面的洞察
 #
 # 分析流程:
-#   Step 1: 市場分析 (market-analysis-{date}-{time}.md)
+#   Step 1: 市場分析 (market-analysis-{date}.md)
 #           → 了解全球市場環境、趨勢、重要新聞
 #
-#   Step 2: 個股分析 (stock-{symbol}-{date}-{time}.md)
+#   Step 2: 個股分析 (stock-{symbol}-{date}.md)
 #           → 基於市場環境,深入分析個別股票(自動跳過指數)
 #           → 標註新聞來源、評估影響、提供操作建議
 #
-#   Step 3: 持倉分析 (holdings-analysis-{date}-{time}.md)
+#   Step 3: 持倉分析 (holdings-analysis-{date}.md)
 #           → 綜合市場和個股分析,評估投資組合
 #           → 聚焦:持股狀況、選擇權管理、績效追蹤
 #
@@ -23,7 +23,6 @@
 #
 # 使用方式:
 #   ./scripts/analysis/run_daily_analysis_claude_cli.sh
-#   TIME_SUFFIX=0800 ./scripts/analysis/run_daily_analysis_claude_cli.sh
 #
 # 版本: v3.0
 ###############################################################################
@@ -45,12 +44,6 @@ NC='\033[0m' # No Color
 TODAY=$(date +"%Y-%m-%d")
 YEAR=$(date +"%Y")
 
-# 時間後綴 (可選)
-# 未設定時使用當前時間 (格式: HHMM, 例如 0800, 1430, 2000)
-if [ -z "$TIME_SUFFIX" ]; then
-    TIME_SUFFIX=$(date +"%H%M")
-fi
-
 # 路徑定義
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 REPO_ROOT="$(cd "${PROJECT_ROOT}/../.." && pwd)"
@@ -68,12 +61,12 @@ PORTFOLIO_SUMMARY="${CONFIG_DIR}/portfolio_summary.yaml"
 PORTFOLIO_HOLDINGS="${REPO_ROOT}/src/financial-analysis-system/portfolio/${YEAR}/holdings.md"
 
 # 輸出檔案
-MARKET_ANALYSIS_OUTPUT="${REPORTS_DIR}/market-analysis-${TODAY}-${TIME_SUFFIX}.md"
-HOLDINGS_ANALYSIS_OUTPUT="${REPORTS_DIR}/holdings-analysis-${TODAY}-${TIME_SUFFIX}.md"
+MARKET_ANALYSIS_OUTPUT="${REPORTS_DIR}/market-analysis-${TODAY}.md"
+HOLDINGS_ANALYSIS_OUTPUT="${REPORTS_DIR}/holdings-analysis-${TODAY}.md"
 
 # 臨時檔案
-MARKET_PROMPT_FILE="/tmp/market-analysis-prompt-${TODAY}-${TIME_SUFFIX}.txt"
-HOLDINGS_PROMPT_FILE="/tmp/holdings-analysis-prompt-${TODAY}-${TIME_SUFFIX}.txt"
+MARKET_PROMPT_FILE="/tmp/market-analysis-prompt-${TODAY}.txt"
+HOLDINGS_PROMPT_FILE="/tmp/holdings-analysis-prompt-${TODAY}.txt"
 
 ###############################################################################
 # 工具函數
@@ -86,7 +79,6 @@ print_header() {
     echo -e "${BLUE}============================================================${NC}"
     echo ""
     echo -e "${GREEN}📅 分析日期: ${TODAY}${NC}"
-    echo -e "${GREEN}⏰ 時間標記: ${TIME_SUFFIX}${NC}"
     echo ""
     echo -e "${YELLOW}📋 分析流程:${NC}"
     echo -e "${GREEN}  Step 1: 市場分析 → 了解全球市場環境${NC}"
@@ -264,8 +256,8 @@ generate_stock_analysis_files() {
             continue
         fi
 
-        local stock_analysis_file="${REPORTS_DIR}/stock-${symbol}-${TODAY}-${TIME_SUFFIX}.md"
-        local stock_prompt_file="/tmp/stock-${symbol}-prompt-${TODAY}-${TIME_SUFFIX}.txt"
+        local stock_analysis_file="${REPORTS_DIR}/stock-${symbol}-${TODAY}.md"
+        local stock_prompt_file="/tmp/stock-${symbol}-prompt-${TODAY}.txt"
 
         # 讀取新聞內容
         local news_content
@@ -987,7 +979,7 @@ show_results() {
 
     # 列出所有個股分析檔案
     local stock_files
-    stock_files=($(find "${REPORTS_DIR}" -name "stock-*-${TODAY}-${TIME_SUFFIX}.md" 2>/dev/null || true))
+    stock_files=($(find "${REPORTS_DIR}" -name "stock-*-${TODAY}.md" 2>/dev/null || true))
     if [[ ${#stock_files[@]} -gt 0 ]]; then
         echo -e "${GREEN}📊 個股分析報告 (${#stock_files[@]} 檔):${NC}"
         for stock_file in "${stock_files[@]}"; do
@@ -1012,7 +1004,7 @@ show_results() {
     echo ""
     if [[ ${#stock_files[@]} -gt 0 ]]; then
         echo -e "${GREEN}   # 個股分析${NC}"
-        echo -e "   ls ${REPORTS_DIR}/stock-*-${TODAY}-${TIME_SUFFIX}.md"
+        echo -e "   ls ${REPORTS_DIR}/stock-*-${TODAY}.md"
         echo ""
     fi
     echo -e "${BLUE}------------------------------------------------------------${NC}"
