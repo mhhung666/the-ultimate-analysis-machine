@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Markdown → HTML converter tailored for the Market Intelligence System.
+Markdown → HTML converter tailored for The Ultimate Analysis System.
 
 - 保留 markdown 中的 emoji、程式碼區塊、表格、巢狀清單、blockquote
 - 自動產生頁面框架 (導航列、TOC、Back to Top 按鈕)
@@ -145,7 +145,7 @@ def create_html_page(title: str, date: str, content_html: str, page_type: str, s
     """建立完整頁面 HTML。"""
     display_title = strip_leading_emoji(title)
     heading_title = display_title
-    hero_note_text = "Market Intelligence System"
+    hero_note_text = "The Ultimate Analysis System"
     if page_type in {"market", "holdings", "stock"}:
         heading_title = strip_trailing_date(display_title)
         hero_note_text = f"更新於 {date}"
@@ -187,14 +187,14 @@ def create_html_page(title: str, date: str, content_html: str, page_type: str, s
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{display_title} | Market Intelligence System</title>
+    <title>{display_title} | The Ultimate Analysis System</title>
     <meta name="description" content="Markdown 報告自動轉換的 {current_page}">
     <link rel="stylesheet" href="{css_path}">
 </head>
 <body class="notion-theme page-{page_type}" id="theme-typography">
     <div class="page-shell">
         <nav class="top-nav">
-            <span class="nav-brand">📊 Market Intelligence System</span>
+            <span class="nav-brand">📊 The Ultimate Analysis System</span>
             <div class="nav-links">
                 <a href="{home_path}"{active_class("home")}>Home</a>
                 <a href="{market_path}"{active_class("market")}>Market</a>
@@ -230,7 +230,7 @@ def create_html_page(title: str, date: str, content_html: str, page_type: str, s
         <button class="back-to-top" id="backToTop" aria-label="回到頂部" title="Back to top">↑</button>
 
         <footer>
-            <p>Market Intelligence System | MH Hung © 2025</p>
+            <p>The Ultimate Analysis System | MH Hung © 2025</p>
         </footer>
     </div>
 

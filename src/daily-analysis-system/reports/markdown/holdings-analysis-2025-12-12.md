@@ -1,7 +1,7 @@
 # 💼 投資組合分析 - 2025-12-12
 
 > **報告生成時間**: 2025-12-12 12:10 UTC
-> **分析引擎**: Market Intelligence System v2.1
+> **分析引擎**: The Ultimate Analysis System v2.1
 > **報告類型**: 持倉分析
 
 ---

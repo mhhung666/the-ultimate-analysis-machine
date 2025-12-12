@@ -73,7 +73,7 @@ tail -f /tmp/market-intelligence-system.log
 # 編輯 crontab
 crontab -e
 
-# 刪除 Market Intelligence System 相關的行
+# 刪除 The Ultimate Analysis System 相關的行
 # 或還原備份
 crontab /path/to/backup/file
 ```

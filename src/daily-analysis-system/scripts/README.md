@@ -140,7 +140,7 @@ ls -lh reports/markdown/
 # 📈 全球市場分析 - 2025-12-02
 
 > **報告生成時間**: 2025-12-02 08:00 UTC
-> **分析引擎**: Market Intelligence System v2.0
+> **分析引擎**: The Ultimate Analysis System v2.0
 > **報告類型**: 全球市場情報
 
 ---
@@ -175,7 +175,7 @@ ls -lh reports/markdown/
 # 💼 投資組合分析 - 2025-12-02
 
 > **報告生成時間**: 2025-12-02 08:00 UTC
-> **分析引擎**: Market Intelligence System v2.0
+> **分析引擎**: The Ultimate Analysis System v2.0
 > **報告類型**: 持倉分析
 
 ---

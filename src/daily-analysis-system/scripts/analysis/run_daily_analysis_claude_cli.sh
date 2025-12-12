@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ###############################################################################
-# Market Intelligence System - Daily Analysis V3
+# The Ultimate Analysis System - Daily Analysis V3
 #
 # 功能說明:
 #   生成三類獨立的分析報告,分析順序經過優化以提供最全面的洞察
@@ -75,7 +75,7 @@ HOLDINGS_PROMPT_FILE="/tmp/holdings-analysis-prompt-${TODAY}.txt"
 # 顯示程式開頭資訊
 print_header() {
     echo -e "${BLUE}============================================================${NC}"
-    echo -e "${BLUE}📊 Market Intelligence System - 每日多報告分析 v3.0${NC}"
+    echo -e "${BLUE}📊 The Ultimate Analysis System - 每日多報告分析 v3.0${NC}"
     echo -e "${BLUE}============================================================${NC}"
     echo ""
     echo -e "${GREEN}📅 分析日期: ${TODAY}${NC}"
@@ -316,7 +316,7 @@ fi)
 # 📊 ${symbol} 個股分析 - ${TODAY}
 
 > **報告生成時間**: $(date +"%Y-%m-%d %H:%M UTC")
-> **分析引擎**: Market Intelligence System v2.1
+> **分析引擎**: The Ultimate Analysis System v2.1
 > **股票代碼**: ${symbol}
 
 ---
@@ -483,7 +483,7 @@ ${news_data}
 # 📈 全球市場分析 - ${TODAY}
 
 > **報告生成時間**: $(date +"%Y-%m-%d %H:%M UTC")
-> **分析引擎**: Market Intelligence System v2.1
+> **分析引擎**: The Ultimate Analysis System v2.1
 > **報告類型**: 全球市場情報
 
 ---
@@ -821,7 +821,7 @@ ${watchlist_news}
 # 💼 投資組合分析 - ${TODAY}
 
 > **報告生成時間**: $(date +"%Y-%m-%d %H:%M UTC")
-> **分析引擎**: Market Intelligence System v2.1
+> **分析引擎**: The Ultimate Analysis System v2.1
 > **報告類型**: 持倉分析
 
 ---

@@ -1,4 +1,4 @@
-# DEVELOPMENT.md - Market Intelligence System
+# DEVELOPMENT.md - The Ultimate Analysis System
 
 開發文檔，包含專案架構、工作流程、GitHub Pages 自動化、以及開發路線圖。
 
@@ -264,4 +264,4 @@ chore    # 雜項
 ---
 
 **最後更新**: 2025-12-03
-**維護者**: Market Intelligence System Team
+**維護者**: The Ultimate Analysis System Team

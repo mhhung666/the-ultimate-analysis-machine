@@ -1,6 +1,6 @@
-# Market Intelligence System - GitHub Pages
+# The Ultimate Analysis System - GitHub Pages
 
-這是 Market Intelligence System 的靜態網站版本。
+這是 The Ultimate Analysis System 的靜態網站版本。
 
 ## 頁面結構
 

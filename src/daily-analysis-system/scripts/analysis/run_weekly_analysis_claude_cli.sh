@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ###############################################################################
-# Market Intelligence System - Weekly Analysis (Claude CLI)
+# The Ultimate Analysis System - Weekly Analysis (Claude CLI)
 #
 # 生成一份「週度市場與持倉週報」,匯總最近 5 個交易日的每日報告:
 # 1. 市場分析週報: 總結指數走勢、產業輪動、重大新聞
@@ -57,7 +57,7 @@ WEEK_END_DATE=""
 
 print_header() {
     echo -e "${BLUE}============================================================${NC}"
-    echo -e "${BLUE}📊 Market Intelligence System - 週度報告生成${NC}"
+    echo -e "${BLUE}📊 The Ultimate Analysis System - 週度報告生成${NC}"
     echo -e "${BLUE}============================================================${NC}"
     echo ""
     echo -e "${GREEN}📅 週次: ${WEEK_LABEL}${NC}"
@@ -169,7 +169,7 @@ EOF
 > **覆蓋區間**: ${WEEK_START_DATE} ~ ${WEEK_END_DATE}
 > **來源報告**: 市場 ${market_count} 份, 持倉 ${holdings_count} 份
 > **生成時間**: $(date +"%Y-%m-%d %H:%M UTC")
-> **分析引擎**: Market Intelligence System v2.0 (Claude Sonnet 4.5)
+> **分析引擎**: The Ultimate Analysis System v2.0 (Claude Sonnet 4.5)
 
 ---
 

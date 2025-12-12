@@ -1,6 +1,6 @@
 #!/bin/bash
 ###############################################################################
-# Market Intelligence System - Complete Daily Workflow
+# The Ultimate Analysis System - Complete Daily Workflow
 #
 # 功能: 完整的每日自動化流程
 #   1. 資料抓取與分析 (make daily)
@@ -70,7 +70,7 @@ TODAY=$(date +"%Y-%m-%d")
 TIME=$(date +"%H:%M:%S")
 
 echo -e "${BLUE}============================================================${NC}"
-echo -e "${BLUE}📊 Market Intelligence System - Daily Workflow${NC}"
+echo -e "${BLUE}📊 The Ultimate Analysis System - Daily Workflow${NC}"
 echo -e "${BLUE}============================================================${NC}"
 echo ""
 echo -e "${GREEN}📅 日期: ${TODAY}${NC}"

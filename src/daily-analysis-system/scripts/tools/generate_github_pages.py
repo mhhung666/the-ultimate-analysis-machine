@@ -15,6 +15,7 @@ import json
 import shutil
 import subprocess
 import sys
+import re
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List
@@ -110,7 +111,6 @@ def extract_stock_info(md_file: Path) -> Dict[str, str]:
     name = symbol  # 預設
 
     # 提取更新日期
-    import re
     date_match = re.search(r"(\d{4}-\d{2}-\d{2})", md_file.name)
     last_update = date_match.group(1) if date_match else datetime.now().strftime("%Y-%m-%d")
 
@@ -163,7 +163,6 @@ def update_stocks_index_html(stocks_data: List[Dict]) -> None:
     js_array = json.dumps(stocks_data, indent=12, ensure_ascii=False)
 
     # 替換 stocks 陣列
-    import re
     pattern = r"const stocks = \[.*?\];"
     replacement = f"const stocks = {js_array};"
 
@@ -171,6 +170,81 @@ def update_stocks_index_html(stocks_data: List[Dict]) -> None:
 
     index_file.write_text(new_content, encoding="utf-8")
     print(f"✅ 更新了個股列表資料 ({len(stocks_data)} 檔個股)")
+
+
+def extract_report_date(report_path: Path) -> str:
+    """嘗試從檔名或內容取得報告日期 (YYYY-MM-DD)。"""
+
+    # 先從檔名尋找
+    name_match = re.search(r"(\d{4}-\d{2}-\d{2})", report_path.stem)
+    if name_match:
+        return name_match.group(1)
+
+    # 再嘗試從檔案內容尋找
+    try:
+        content = report_path.read_text(encoding="utf-8")
+        content_match = re.search(r"(\d{4}-\d{2}-\d{2})", content)
+        if content_match:
+            return content_match.group(1)
+    except Exception:
+        pass
+
+    # 最後 fallback 為檔案修改時間
+    return datetime.fromtimestamp(report_path.stat().st_mtime).strftime("%Y-%m-%d")
+
+
+def update_homepage_cards(market_date: str | None, holdings_date: str | None, stock_count: int | None) -> None:
+    """同步首頁卡片顯示的日期與個股數量。"""
+
+    index_file = DOCS_DIR / "index.html"
+
+    if not index_file.exists():
+        print(f"⚠️  找不到首頁檔案: {index_file}")
+        return
+
+    content = index_file.read_text(encoding="utf-8")
+    updated = False
+
+    def replace_block(pattern: re.Pattern[str], new_value: str, label: str) -> None:
+        nonlocal content, updated
+
+        def repl(match: re.Match[str]) -> str:
+            return f"{match.group(1)}{new_value}{match.group(3)}"
+
+        new_content, count = pattern.subn(repl, content, count=1)
+        if count == 0:
+            print(f"⚠️  無法在首頁找到 {label} 區塊，請確認模板。")
+            return
+
+        content = new_content
+        updated = True
+
+    if market_date:
+        market_pattern = re.compile(
+            r'(<a href="market\.html"[^>]*class="card"[^>]*>[\s\S]*?<span class="date">)([^<]+)(</span>)',
+            re.DOTALL
+        )
+        replace_block(market_pattern, market_date, "市場分析卡片")
+
+    if holdings_date:
+        holdings_pattern = re.compile(
+            r'(<a href="holdings\.html"[^>]*class="card"[^>]*>[\s\S]*?<span class="date">)([^<]+)(</span>)',
+            re.DOTALL
+        )
+        replace_block(holdings_pattern, holdings_date, "投資組合卡片")
+
+    if stock_count is not None:
+        stock_pattern = re.compile(
+            r'(<a href="stocks/index\.html"[^>]*class="card"[^>]*>[\s\S]*?<span class="badge">)([^<]+)(</span>\s*<span class="date">)',
+            re.DOTALL
+        )
+        replace_block(stock_pattern, f"{stock_count} 檔個股", "個股追蹤卡片")
+
+    if updated:
+        index_file.write_text(content, encoding="utf-8")
+        print("✅ 已更新首頁卡片日期/統計資料")
+    else:
+        print("ℹ️  首頁卡片無需更新或未找到相對應區塊")
 
 
 def main() -> None:
@@ -182,6 +256,9 @@ def main() -> None:
     # 1. 找到最新報告
     print("📋 尋找最新報告...")
     reports = find_latest_reports()
+    market_date = extract_report_date(reports["market"]) if reports["market"] else None
+    holdings_date = extract_report_date(reports["holdings"]) if reports["holdings"] else None
+    stocks_data: List[Dict] = []
 
     # 2. 轉換市場分析
     if reports["market"]:
@@ -202,9 +279,6 @@ def main() -> None:
     # 4. 轉換個股報告
     if reports["stocks"]:
         print(f"\n📈 轉換個股報告 ({len(reports['stocks'])} 檔)...")
-
-        stocks_data = []
-
         for symbol, md_file in sorted(reports["stocks"].items()):
             output = STOCKS_DIR / f"{symbol}.html"
             success = convert_markdown_to_html(md_file, output, "stock")
@@ -220,6 +294,10 @@ def main() -> None:
             update_stocks_index_html(stocks_data)
     else:
         print("⚠️  找不到個股報告")
+
+    stock_count = len(stocks_data) if stocks_data else (len(reports["stocks"]) if reports["stocks"] else 0)
+    print("\n🧭 更新首頁資訊卡片...")
+    update_homepage_cards(market_date, holdings_date, stock_count)
 
     print(f"\n✅ GitHub Pages 生成完成!")
     print(f"   輸出目錄: {DOCS_DIR}")
