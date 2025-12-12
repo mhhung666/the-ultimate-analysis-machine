@@ -1,0 +1,264 @@
+# 投資組合持股配置
+# 最後更新：2025-12-04
+#
+# 可自訂追蹤持股，新增或移除股票無需修改程式碼
+#
+# fetch_news: true/false - 控制該股票是否爬取新聞
+# enabled: true/false - 控制該股票是否啟用（用於暫停某些股票而不刪除配置）
+
+holdings:
+  # 核心持倉
+  核心持倉:
+    Unity Software:
+      symbol: "U"
+      fetch_news: true
+      enabled: true
+      position: 14.2%
+      shares: 820
+      cost: $50.39
+      current_price: $45.78
+
+    Intel:
+      symbol: "INTC"
+      fetch_news: true
+      enabled: true
+      position: 12.5%
+      shares: 800
+      cost: $45.82
+      current_price: $41.41
+
+    Amrize Inc.:
+      symbol: "AMRZ"
+      fetch_news: true
+      enabled: true
+      position: 8.3%
+      shares: 400
+      cost: $53.08
+      current_price: $54.74
+
+    Pinterest:
+      symbol: "PINS"
+      fetch_news: true
+      enabled: true
+      position: 5.0%
+      shares: 500
+      cost: $33.60
+      current_price: $26.75
+
+    Upstart:
+      symbol: "UPST"
+      fetch_news: true
+      enabled: true
+      position: 5.3%
+      shares: 300
+      cost: $49.67
+      current_price: $46.75
+
+    United Parcel Service:
+      symbol: "UPS"
+      fetch_news: true
+      enabled: true
+      position: 3.6%
+      shares: 100
+      cost: $92.00
+      current_price: $94.87
+
+    Alphabet:
+      symbol: "GOOGL"
+      fetch_news: true
+      enabled: true
+      position: 15.7%
+      shares: 130
+      cost: $267.98
+      current_price: $321.27
+
+    Tesla:
+      symbol: "TSLA"
+      fetch_news: true
+      enabled: true
+      position: 3.4%
+      shares: 20
+      cost: $298.88
+      current_price: $455.00
+
+  # 一般持倉
+  一般持倉:
+    Vail Resorts:
+      symbol: "MTN"
+      fetch_news: true
+      enabled: true
+      position: 2.7%
+      shares: 50
+      cost: $163.76
+      current_price: $144.36
+
+    Alaska Air Group:
+      symbol: "ALK"
+      fetch_news: true
+      enabled: true
+      position: 1.9%
+      shares: 100
+      cost: $40.00
+      current_price: $49.65
+
+    Oscar Health:
+      symbol: "OSCR"
+      fetch_news: false
+      enabled: true
+      position: 1.3%
+      shares: 200
+      cost: $18.50
+      current_price: $16.77
+
+    Option Care Health:
+      symbol: "OPCH"
+      fetch_news: false
+      enabled: true
+      position: 1.1%
+      shares: 100
+      cost: $28.01
+      current_price: $29.89
+
+    Mobileye:
+      symbol: "MBLY"
+      fetch_news: true
+      enabled: true
+      position: 0.9%
+      shares: 200
+      cost: $17.00
+      current_price: $11.70
+
+  # 小倉位 / 其他
+  小倉位:
+    Stoneweg Europe Trust:
+      symbol: "SET.SI"
+      fetch_news: false
+      enabled: false
+      position: 1.5%
+      shares: 2500
+      cost: "€2.04"
+      current_price: "€1.56"
+      note: "新加坡股票，yfinance可能不支援"
+
+    DraftKings:
+      symbol: "DKNG"
+      fetch_news: true
+      enabled: true
+      position: 1.3%
+      shares: 100
+      cost: $35.01
+      current_price: $34.00
+
+  # 選擇權部位
+  選擇權部位:
+    # 持股相關選擇權
+    Upstart (UPST):
+      symbol: "UPST"
+      options:
+        - type: "Sell Call"
+          quantity: -1
+          strike: $50.00
+          expiry: "2025-12-12"
+          status: "價外安全"
+        - type: "Sell Call"
+          quantity: -2
+          strike: $52.00
+          expiry: "2025-12-12"
+          status: "價外安全"
+
+    United Parcel Service (UPS):
+      symbol: "UPS"
+      options:
+        - type: "Sell Put"
+          quantity: -1
+          strike: $90.00
+          expiry: "2025-12-19"
+          status: "價外安全"
+        - type: "Sell Call"
+          quantity: -1
+          strike: $105.00
+          expiry: "2025-12-19"
+          status: "價外安全"
+
+    Alaska Air (ALK):
+      symbol: "ALK"
+      options:
+        - type: "Sell Put"
+          quantity: -2
+          strike: $37.50
+          expiry: "2025-12-19"
+          status: "價外安全"
+        - type: "Sell Call"
+          quantity: -1
+          strike: $47.50
+          expiry: "2025-12-19"
+          status: "價內風險"
+
+    Oscar Health (OSCR):
+      symbol: "OSCR"
+      options:
+        - type: "Sell Call"
+          quantity: -2
+          strike: $18.00
+          expiry: "2025-12-19"
+          status: "價外安全"
+
+    Option Care Health (OPCH):
+      symbol: "OPCH"
+      options:
+        - type: "Sell Call"
+          quantity: -1
+          strike: $30.00
+          expiry: "2025-12-19"
+          status: "價內"
+
+    Amrize (AMRZ):
+      symbol: "AMRZ"
+      options:
+        - type: "Sell Call"
+          quantity: -2
+          strike: $55.00
+          expiry: "2025-12-19"
+          status: "價外安全"
+
+    # 無持股選擇權
+    DraftKings (DKNG):
+      symbol: "DKNG"
+      fetch_news: true
+      enabled: true
+      options:
+        - type: "Sell Call"
+          quantity: -1
+          strike: $37.00
+          expiry: "2025-12-12"
+          status: "價外安全"
+
+    Alphabet (GOOG):
+      symbol: "GOOG"
+      options:
+        - type: "Sell Call"
+          quantity: -1
+          strike: $330.00
+          expiry: "2025-12-12"
+          status: "價外安全"
+
+# 觀察清單 - 非持股但想追蹤的股票
+watchlist:
+  # 觀察清單說明：
+  # 這些股票不是你的持股，但你想追蹤其新聞和價格走勢
+  # fetch_news: true - 會抓取新聞並在持倉分析中顯示觀察清單分析
+  # enabled: true - 啟用追蹤
+
+  潛在投資標的:
+    # 範例：可以加入你想關注的股票
+    # NVIDIA:
+    #   symbol: "NVDA"
+    #   fetch_news: true
+    #   enabled: true
+    #   note: "關注 AI 晶片市場動向"
+    #
+    Oracle:
+      symbol: "ORCL"
+      fetch_news: true
+      enabled: true
+      note: "關注雲端業務成長"

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Intelligence System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="notion-theme page-home" id="theme-typography">
+    <div class="page-shell">
+        <nav class="top-nav">
+            <span class="nav-brand">📊 Market Intelligence System</span>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="market.html" class="nav-link">Market</a>
+                <a href="holdings.html" class="nav-link">Holdings</a>
+                <a href="stocks/index.html" class="nav-link">Stocks</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="切換主題" title="Toggle theme">
+                    <span id="themeIcon">☀️</span>
+                </button>
+            </div>
+        </nav>
+
+        <header class="report-hero">
+            <div>
+                <p class="eyebrow">Welcome</p>
+                <h1>📊 Market Intelligence System</h1>
+                <p class="hero-note">AI 驅動的市場分析與投資決策支援系統</p>
+            </div>
+        </header>
+
+        <main>
+            <div class="card-grid">
+                <a href="market.html" class="card">
+                    <div class="card-icon">🌍</div>
+                    <h2>全球市場分析</h2>
+                    <p>深度分析全球股市、產業輪動、重要新聞與投資機會</p>
+                    <div class="card-footer">
+                        <span class="badge">最新報告</span>
+                        <span class="date">2025-12-05</span>
+                    </div>
+                </a>
+
+                <a href="holdings.html" class="card">
+                    <div class="card-icon">💼</div>
+                    <h2>投資組合分析</h2>
+                    <p>個人持倉分析、選擇權策略、倉位調整建議</p>
+                    <div class="card-footer">
+                        <span class="badge">最新報告</span>
+                        <span class="date">2025-12-05</span>
+                    </div>
+                </a>
+
+                <a href="stocks/index.html" class="card">
+                    <div class="card-icon">📈</div>
+                    <h2>個股追蹤</h2>
+                    <p>重點個股的深度分析、新聞追蹤與投資建議</p>
+                    <div class="card-footer">
+                        <span class="badge">11 檔個股</span>
+                        <span class="date">即時更新</span>
+                    </div>
+                </a>
+            </div>
+
+            <section class="info-section">
+                <h3>系統特色</h3>
+                <div class="features">
+                    <div class="feature">
+                        <h4>🤖 AI 驅動分析</h4>
+                        <p>採用 Claude Sonnet 4.5 進行深度分析與預測</p>
+                    </div>
+                    <div class="feature">
+                        <h4>💡 投資建議</h4>
+                        <p>基於量化分析提供具體的投資策略建議</p>
+                    </div>
+                    <div class="feature">
+                        <h4>⚠️ 風險管理</h4>
+                        <p>完整的風險評估與應對措施</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="disclaimer">
+                <h3>免責聲明</h3>
+                <p>本系統提供的所有資訊僅供參考,不構成任何投資建議。投資有風險,請根據自身情況做出獨立決策。</p>
+            </section>
+        </main>
+
+        <button class="back-to-top" id="backToTop" aria-label="回到頂部">↑</button>
+
+        <footer>
+            <p>Market Intelligence System | MH Hung © 2025</p>
+        </footer>
+    </div>
+    <script>
+        // 主題切換 (Notion-style)
+        function getPreferredTheme() {
+            const stored = localStorage.getItem('mis-theme');
+            if (stored === 'light' || stored === 'dark') return stored;
+            // Notion 預設為淺色模式
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function applyTheme(theme) {
+            const body = document.body;
+            body.classList.toggle('theme-light', theme === 'light');
+            body.classList.toggle('theme-dark', theme === 'dark');
+            localStorage.setItem('mis-theme', theme);
+
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'light' ? '🌙' : '☀️';
+            }
+
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) {
+                toggle.setAttribute('aria-label', `切換為${theme === 'light' ? '深色' : '淺色'}模式`);
+            }
+        }
+
+        function setupMobileNav() {
+            const nav = document.querySelector('.top-nav');
+            const navLinks = nav?.querySelector('.nav-links');
+            const navActions = nav?.querySelector('.nav-actions');
+            const navBrand = nav?.querySelector('.nav-brand');
+            if (!nav || !navLinks || !navActions || !navBrand) return;
+
+            let toggle = document.getElementById('menuToggle');
+            if (!toggle) {
+                toggle = document.createElement('button');
+                toggle.id = 'menuToggle';
+                toggle.type = 'button';
+                toggle.className = 'menu-toggle';
+                toggle.setAttribute('aria-label', '開啟選單');
+                toggle.setAttribute('aria-expanded', 'false');
+                toggle.textContent = '☰';
+                nav.insertBefore(toggle, navBrand);
+            }
+
+            let backdrop = document.getElementById('navBackdrop');
+            if (!backdrop) {
+                backdrop = document.createElement('div');
+                backdrop.id = 'navBackdrop';
+                backdrop.className = 'nav-backdrop';
+                document.body.appendChild(backdrop);
+            }
+
+            const closeNav = () => {
+                document.body.classList.remove('nav-open');
+                toggle.setAttribute('aria-expanded', 'false');
+            };
+
+            const openNav = () => {
+                document.body.classList.add('nav-open');
+                toggle.setAttribute('aria-expanded', 'true');
+            };
+
+            toggle.addEventListener('click', () => {
+                const isOpen = document.body.classList.contains('nav-open');
+                isOpen ? closeNav() : openNav();
+            });
+
+            backdrop.addEventListener('click', closeNav);
+            navLinks.addEventListener('click', (event) => {
+                if (event.target instanceof HTMLElement && event.target.tagName === 'A') {
+                    closeNav();
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    closeNav();
+                }
+            });
+
+            document.body.classList.add('nav-ready');
+        }
+
+        function handleBackToTop() {
+            const btn = document.getElementById('backToTop');
+            if (window.pageYOffset > 300) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTheme(getPreferredTheme());
+            handleBackToTop();
+
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    handleBackToTop();
+                }, 100);
+            });
+
+            document.getElementById('backToTop').addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const nextTheme = document.body.classList.contains('theme-light') ? 'dark' : 'light';
+                    applyTheme(nextTheme);
+                });
+            }
+
+            setupMobileNav();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+# 投資組合績效追蹤
+# 記錄不同時間點的資產統計，方便計算績效表現
+#
+# 使用說明：
+# - 每次更新帳戶資訊時，新增一筆記錄到 snapshots 列表
+# - 保持時間倒序排列（最新的在最上方）
+# - 可用於計算日報酬率、週報酬率、月報酬率等
+#
+# 欄位說明：
+# - net_liquidation: 淨清算價值（帳戶總價值，含現金+股票）- 最重要的績效指標
+# - stock_value: 持股市值（所有股票按市價計算的總價值）
+# - cash_balance: 現金餘額（可用現金）
+# - equity_with_loan: 含貸款權益值（淨值 + 借貸額度）
+# - buying_power: 購買力（可用於交易的最大金額，含槓桿）
+# - available_funds: 可用資金（不含槓桿的可用金額）
+# - maintenance_margin: 維持保證金（券商要求的最低保證金）
+# - cushion: 保證金緩衝比率（距離追繳保證金的安全距離，越高越安全）
+
+snapshots:
+  # 最新資料
+  - date: "2025-12-05"
+    net_liquidation: $265,799.23      # 帳戶總價值
+    stock_value: $210,673.52          # 持股市值
+    cash_balance: $57,373.45          # 現金餘額
+    equity_with_loan: $266,375.74     # 含貸款權益值
+    buying_power: $828,668.91         # 購買力（含槓桿）
+    available_funds: $207,167.23      # 可用資金
+    maintenance_margin: $55,390.95    # 維持保證金
+    cushion: 0.795747                 # 保證金緩衝 79.57%（非常安全）
+    note: "初始快照"
+
+  # 範例：下一次更新時新增一筆記錄
+  # - date: "2025-12-06"
+  #   net_liquidation: $XXX,XXX.XX
+  #   stock_value: $XXX,XXX.XX
+  #   cash_balance: $XX,XXX.XX
+  #   equity_with_loan: $XXX,XXX.XX
+  #   buying_power: $XXX,XXX.XX
+  #   available_funds: $XXX,XXX.XX
+  #   maintenance_margin: $XX,XXX.XX
+  #   cushion: 0.XXXXXX
+  #   note: "每日更新"
+
+# 績效計算參考
+# - 日報酬率 = (今日 net_liquidation - 昨日 net_liquidation) / 昨日 net_liquidation * 100%
+# - 週報酬率 = (本週 net_liquidation - 上週 net_liquidation) / 上週 net_liquidation * 100%
+# - 月報酬率 = (本月 net_liquidation - 上月 net_liquidation) / 上月 net_liquidation * 100%
+# - 年化報酬率 = ((當前 net_liquidation / 初始 net_liquidation) ^ (365 / 持有天數) - 1) * 100%

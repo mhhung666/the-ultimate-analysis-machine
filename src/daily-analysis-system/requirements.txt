@@ -1,0 +1,10 @@
+# USD/JPY 匯率爬蟲所需套件
+yfinance>=0.2.0
+pandas>=2.0.0
+pyyaml>=6.0
+
+# 測試套件
+pytest>=7.0.0
+
+# Markdown → HTML 轉換
+markdown>=3.5.2

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個股追蹤 | Market Intelligence System</title>
+    <meta name="description" content="市場情報系統 - 個股分析追蹤列表">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .search-box {
+            margin: 24px 0;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 48px 16px 20px;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            color: var(--text);
+            font-size: 1rem;
+            font-family: var(--font-sans);
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px rgba(46, 170, 220, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            pointer-events: none;
+        }
+
+        .stocks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+            margin-top: 28px;
+        }
+
+        .stock-card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            text-decoration: none;
+            color: var(--text);
+            box-shadow: none;
+            transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+        }
+
+        .stock-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--border-light);
+            background: var(--panel-2);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 16px;
+        }
+
+        .stock-symbol {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: 0.5px;
+        }
+
+        .stock-name {
+            font-size: 0.95rem;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .stock-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .stock-badge {
+            padding: 6px 12px;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid var(--border);
+            background: var(--panel-2);
+            color: var(--text);
+        }
+
+        .badge-positive {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--success);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .badge-negative {
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .badge-neutral {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .stock-update {
+            font-size: 0.85rem;
+            color: var(--muted);
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .stock-update-icon {
+            font-size: 1rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--muted);
+        }
+
+        @media (max-width: 768px) {
+            .stocks-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="notion-theme page-stock" id="theme-typography">
+    <div class="page-shell">
+        <nav class="top-nav">
+            <span class="nav-brand">📊 Market Intelligence System</span>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="../market.html" class="nav-link">Market</a>
+                <a href="../holdings.html" class="nav-link">Holdings</a>
+                <a href="index.html" class="nav-link active">Stocks</a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="切換主題" title="Toggle theme">
+                    <span id="themeIcon">☀️</span>
+                </button>
+            </div>
+        </nav>
+
+        <header class="report-hero">
+            <div>
+                <p class="eyebrow">Stock Analysis</p>
+                <h1>📈 個股追蹤列表</h1>
+                <p class="hero-note">即時追蹤重點個股的最新分析與市場動態</p>
+            </div>
+        </header>
+
+        <main class="page-layout no-toc">
+            <div class="search-box">
+                <input
+                    type="text"
+                    class="search-input"
+                    id="searchInput"
+                    placeholder="🔍 搜尋股票代碼或公司名稱..."
+                    autocomplete="off"
+                >
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <div class="stocks-grid" id="stocksGrid">
+                <!-- 股票卡片將由 JavaScript 動態生成 -->
+            </div>
+
+            <div class="no-results" id="noResults" style="display: none;">
+                <span style="font-size: 3rem;">🔍</span>
+                <h3>找不到符合的股票</h3>
+                <p>請嘗試其他搜尋關鍵字</p>
+            </div>
+        </main>
+
+        <button class="back-to-top" id="backToTop" aria-label="回到頂部">↑</button>
+
+        <footer>
+            <p>Powered by Market Intelligence System | MH Hung | © 2025</p>
+        </footer>
+    </div>
+
+    <script>
+        // 股票資料
+        const stocks = [
+            {
+                        "symbol": "ALK",
+                        "name": "ALK",
+<<<<<<< HEAD
+                        "sentiment": "positive",
+                        "newsCount": 4,
+                        "lastUpdate": "2025-12-10"
+            },
+            {
+                        "symbol": "AMRZ",
+                        "name": "AMRZ",
+                        "sentiment": "positive",
+                        "newsCount": 1,
+=======
+                        "sentiment": "neutral",
+                        "newsCount": 6,
+>>>>>>> 9449a5c1dfdd22e036862a355549d40dfb912f70
+                        "lastUpdate": "2025-12-10"
+            },
+            {
+                        "symbol": "DKNG",
+                        "name": "DKNG",
+                        "sentiment": "positive",
+<<<<<<< HEAD
+                        "newsCount": 4,
+=======
+                        "newsCount": 5,
+>>>>>>> 9449a5c1dfdd22e036862a355549d40dfb912f70
+                        "lastUpdate": "2025-12-10"
+            },
+            {
+                        "symbol": "GOOGL",
+                        "name": "GOOGL",
+                        "sentiment": "positive",
+                        "newsCount": 5,
+                        "lastUpdate": "2025-12-10"
+            },
+            {
+                        "symbol": "INTC",
+                        "name": "INTC",
+                        "sentiment": "neutral",
+<<<<<<< HEAD
+                        "newsCount": 4,
+=======
+                        "newsCount": 2,
+>>>>>>> 9449a5c1dfdd22e036862a355549d40dfb912f70
+                        "lastUpdate": "2025-12-10"
+            },
+            {
+                        "symbol": "MBLY",
+                        "name": "MBLY",
+                        "sentiment": "positive",
+                        "newsCount": 2,
+                        "lastUpdate": "2025-12-05"
+            },
+            {
+                        "symbol": "MTN",
+                        "name": "MTN",
+                        "sentiment": "negative",
+<<<<<<< HEAD
+                        "newsCount": 5,
+=======
+                        "newsCount": 4,
+>>>>>>> 9449a5c1dfdd22e036862a355549d40dfb912f70
+                        "lastUpdate": "2025-12-10"
+            },
+            {
+                        "symbol": "PINS",
+                        "name": "PINS",
+                        "sentiment": "negative",
+                        "newsCount": 4,
+                        "lastUpdate": "2025-12-10"
+            },
+            {
+                        "symbol": "TSLA",
+                        "name": "TSLA",
+<<<<<<< HEAD
+                        "sentiment": "neutral",
+=======
+                        "sentiment": "negative",
+>>>>>>> 9449a5c1dfdd22e036862a355549d40dfb912f70
+                        "newsCount": 6,
+                        "lastUpdate": "2025-12-10"
+            },
+            {
+                        "symbol": "U",
+                        "name": "U",
+                        "sentiment": "positive",
+                        "newsCount": 4,
+                        "lastUpdate": "2025-12-10"
+            },
+            {
+                        "symbol": "UPS",
+                        "name": "UPS",
+                        "sentiment": "positive",
+                        "newsCount": 6,
+                        "lastUpdate": "2025-12-10"
+            },
+            {
+                        "symbol": "UPST",
+                        "name": "UPST",
+                        "sentiment": "neutral",
+                        "newsCount": 3,
+                        "lastUpdate": "2025-12-10"
+            }
+];
+
+        // 渲染股票卡片
+        function renderStocks(filteredStocks) {
+            const grid = document.getElementById('stocksGrid');
+            const noResults = document.getElementById('noResults');
+
+            if (filteredStocks.length === 0) {
+                grid.style.display = 'none';
+                noResults.style.display = 'block';
+                return;
+            }
+
+            grid.style.display = 'grid';
+            noResults.style.display = 'none';
+
+            grid.innerHTML = filteredStocks.map(stock => {
+                const sentimentClass = `badge-${stock.sentiment}`;
+                const sentimentLabel = {
+                    'positive': '🟢 正面',
+                    'negative': '🔴 負面',
+                    'neutral': '🟡 中性'
+                }[stock.sentiment];
+
+                return `
+                    <a href="${stock.symbol}.html" class="stock-card">
+                        <div class="stock-header">
+                            <div>
+                                <div class="stock-symbol">${stock.symbol}</div>
+                                <div class="stock-name">${stock.name}</div>
+                            </div>
+                        </div>
+                        <div class="stock-meta">
+                            <span class="stock-badge ${sentimentClass}">${sentimentLabel}</span>
+                            <span class="stock-badge" style="background: rgba(34, 211, 238, 0.12); color: var(--accent); border: 1px solid rgba(34, 211, 238, 0.3);">
+                                ${stock.newsCount} 則新聞
+                            </span>
+                        </div>
+                        <div class="stock-update">
+                            <span class="stock-update-icon">🕒</span>
+                            <span>更新於 ${stock.lastUpdate}</span>
+                        </div>
+                    </a>
+                `;
+            }).join('');
+        }
+
+        // 搜尋功能
+        const searchInput = document.getElementById('searchInput');
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+
+            if (query === '') {
+                renderStocks(stocks);
+                return;
+            }
+
+            const filtered = stocks.filter(stock =>
+                stock.symbol.toLowerCase().includes(query) ||
+                stock.name.toLowerCase().includes(query)
+            );
+
+            renderStocks(filtered);
+        });
+
+        // 初始渲染
+        renderStocks(stocks);
+
+        // 主題切換 (Notion-style)
+        function getPreferredTheme() {
+            const stored = localStorage.getItem('mis-theme');
+            if (stored === 'light' || stored === 'dark') return stored;
+            // Notion 預設為淺色模式
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        function applyTheme(theme) {
+            const body = document.body;
+            body.classList.toggle('theme-light', theme === 'light');
+            body.classList.toggle('theme-dark', theme === 'dark');
+            localStorage.setItem('mis-theme', theme);
+
+            const icon = document.getElementById('themeIcon');
+            if (icon) {
+                icon.textContent = theme === 'light' ? '🌙' : '☀️';
+            }
+
+            const toggle = document.getElementById('themeToggle');
+            if (toggle) {
+                toggle.setAttribute('aria-label', `切換為${theme === 'light' ? '深色' : '淺色'}模式`);
+            }
+        }
+
+        // Mobile nav toggle
+        function setupMobileNav() {
+            const nav = document.querySelector('.top-nav');
+            const navLinks = nav?.querySelector('.nav-links');
+            const navActions = nav?.querySelector('.nav-actions');
+            const navBrand = nav?.querySelector('.nav-brand');
+            if (!nav || !navLinks || !navActions || !navBrand) return;
+
+            let toggle = document.getElementById('menuToggle');
+            if (!toggle) {
+                toggle = document.createElement('button');
+                toggle.id = 'menuToggle';
+                toggle.type = 'button';
+                toggle.className = 'menu-toggle';
+                toggle.setAttribute('aria-label', '開啟選單');
+                toggle.setAttribute('aria-expanded', 'false');
+                toggle.textContent = '☰';
+                nav.insertBefore(toggle, navBrand);
+            }
+
+            let backdrop = document.getElementById('navBackdrop');
+            if (!backdrop) {
+                backdrop = document.createElement('div');
+                backdrop.id = 'navBackdrop';
+                backdrop.className = 'nav-backdrop';
+                document.body.appendChild(backdrop);
+            }
+
+            const closeNav = () => {
+                document.body.classList.remove('nav-open');
+                toggle.setAttribute('aria-expanded', 'false');
+            };
+
+            const openNav = () => {
+                document.body.classList.add('nav-open');
+                toggle.setAttribute('aria-expanded', 'true');
+            };
+
+            toggle.addEventListener('click', () => {
+                const isOpen = document.body.classList.contains('nav-open');
+                isOpen ? closeNav() : openNav();
+            });
+
+            backdrop.addEventListener('click', closeNav);
+            navLinks.addEventListener('click', (event) => {
+                if (event.target instanceof HTMLElement && event.target.tagName === 'A') {
+                    closeNav();
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) {
+                    closeNav();
+                }
+            });
+
+            document.body.classList.add('nav-ready');
+        }
+
+        // Back to top
+        function handleBackToTop() {
+            const btn = document.getElementById('backToTop');
+            if (window.pageYOffset > 320) {
+                btn.classList.add('visible');
+            } else {
+                btn.classList.remove('visible');
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            applyTheme(getPreferredTheme());
+            handleBackToTop();
+
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    handleBackToTop();
+                }, 60);
+            });
+
+            document.getElementById('backToTop').addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const nextTheme = document.body.classList.contains('theme-light') ? 'dark' : 'light';
+                    applyTheme(nextTheme);
+                });
+            }
+            setupMobileNav();
+        });
+    </script>
+</body>
+</html>

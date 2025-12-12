@@ -1,0 +1,132 @@
+# 全球主要市場指數配置
+# 可自訂追蹤市場，新增或移除指數無需修改程式碼
+#
+# fetch_news: true/false - 控制該指數是否爬取新聞
+
+global_indices:
+  # 亞洲市場
+  日本:
+    日經225:
+      symbol: "^N225"
+      fetch_news: true
+    TOPIX:
+      symbol: "^TPX"
+      fetch_news: false
+
+  韓國:
+    KOSPI:
+      symbol: "^KS11"
+      fetch_news: false
+    KOSDAQ:
+      symbol: "^KQ11"
+      fetch_news: false
+
+  台灣:
+    台灣加權指數:
+      symbol: "^TWII"
+      fetch_news: false
+
+  中國:
+    上證指數:
+      symbol: "000001.SS"
+      fetch_news: false
+    深證成指:
+      symbol: "399001.SZ"
+      fetch_news: false
+    滬深300:
+      symbol: "000300.SS"
+      fetch_news: false
+
+  新加坡:
+    海峽時報指數:
+      symbol: "^STI"
+      fetch_news: false
+
+  香港:
+    恆生指數:
+      symbol: "^HSI"
+      fetch_news: true
+    國企指數:
+      symbol: "^HSCE"
+      fetch_news: false
+
+  # 歐洲市場
+  歐洲:
+    STOXX 50:
+      symbol: "^STOXX50E"
+      fetch_news: false
+    德國DAX:
+      symbol: "^GDAXI"
+      fetch_news: false
+    法國CAC 40:
+      symbol: "^FCHI"
+      fetch_news: false
+    英國FTSE 100:
+      symbol: "^FTSE"
+      fetch_news: false
+
+  # 美國市場
+  美國:
+    S&P 500:
+      symbol: "^GSPC"
+      fetch_news: true
+    Dow Jones:
+      symbol: "^DJI"
+      fetch_news: true
+    NASDAQ:
+      symbol: "^IXIC"
+      fetch_news: true
+    Russell 2000:
+      symbol: "^RUT"
+      fetch_news: false
+    VIX恐慌指數:
+      symbol: "^VIX"
+      fetch_news: true
+    費城半導體指數:
+      symbol: "^SOX"
+      fetch_news: true
+    道瓊運輸指數:
+      symbol: "^DJT"
+      fetch_news: false
+    道瓊公用事業指數:
+      symbol: "^DJU"
+      fetch_news: false
+
+  # 新興市場
+  新興市場:
+    MSCI新興市場:
+      symbol: "EEM"
+      fetch_news: false
+    印度SENSEX:
+      symbol: "^BSESN"
+      fetch_news: false
+    巴西BOVESPA:
+      symbol: "^BVSP"
+      fetch_news: false
+
+  # 商品與貨幣
+  商品市場:
+    美元指數:
+      symbol: "DX-Y.NYB"
+      fetch_news: false
+    黃金期貨:
+      symbol: "GC=F"
+      fetch_news: true
+    WTI原油:
+      symbol: "CL=F"
+      fetch_news: true
+    比特幣:
+      symbol: "BTC-USD"
+      fetch_news: true
+
+  # 債券市場
+  債券市場:
+    美國10年期公債殖利率:
+      symbol: "^TNX"
+      fetch_news: true
+    美國2年期公債殖利率:
+      symbol: "^IRX"
+      fetch_news: false
+    高收益債ETF:
+      symbol: "HYG"
+      fetch_news: false

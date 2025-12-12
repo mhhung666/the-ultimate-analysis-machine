@@ -1,0 +1,51 @@
+name: Build GitHub Pages HTML
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "reports/markdown/**"
+      - "src/scripts/tools/convert_md_to_html.py"
+      - "Makefile"
+  workflow_dispatch:
+
+jobs:
+  build-pages:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build HTML from latest reports
+        run: |
+          make update-pages
+
+      - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet docs; then
+            echo "No HTML updates."
+            exit 0
+          fi
+          git add docs
+          git commit -m "ci: update GitHub Pages HTML from reports"
+          git push origin HEAD
