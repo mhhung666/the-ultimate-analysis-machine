@@ -45,6 +45,11 @@ else
 fi
 
 # 驗證 Claude token 是否存在
+# 支援 CLAUDE_TOKEN 或 CLAUDE_CODE_OAUTH_TOKEN
+if [ -n "$CLAUDE_TOKEN" ]; then
+    export CLAUDE_CODE_OAUTH_TOKEN="$CLAUDE_TOKEN"
+fi
+
 if [ -z "$CLAUDE_CODE_OAUTH_TOKEN" ]; then
     # 嘗試從 Claude CLI 設定檔讀取
     if [ -f "$HOME/.config/claude/credentials.json" ]; then
@@ -60,9 +65,6 @@ if [ -z "$CLAUDE_CODE_OAUTH_TOKEN" ]; then
         echo -e "${RED}   請在 .env 檔案中設定，或確認 launchd plist 中有設定${NC}"
         exit 1
     fi
-else
-    # 統一使用 CLAUDE_CODE_OAUTH_TOKEN
-    export CLAUDE_CODE_OAUTH_TOKEN="${CLAUDE_CODE_OAUTH_TOKEN:-$CLAUDE_TOKEN}"
 fi
 
 # 日期
