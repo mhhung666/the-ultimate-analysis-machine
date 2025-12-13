@@ -1,0 +1,84 @@
+# 投資組合基本設定與目標配置
+#
+# 用途：
+# - 給 Claude CLI 分析 - 檢查當前配置是否偏離目標、產生再平衡建議、風險控管
+#
+# 使用說明：
+# - 定義投資組合的目標配置區間（如科技股 35-45%）
+# - 設定風險限制（如單一持股上限 20%）
+# - 設定績效比較基準與再平衡規則
+
+# 投資組合基本資訊
+metadata:
+  inception_date: "2025-12-05"      # 投資組合起始日期（開始追蹤績效的日期）
+  initial_capital: $265,799.23      # 初始資金（2025-12-05 淨清算價值）
+  current_capital: $264,079.47      # 當前資金（2025-12-13 淨清算價值）
+  base_currency: "USD"              # 基準貨幣
+  account_type: "Interactive Brokers" # 券商帳戶類型
+  investment_style: "成長型"         # 投資風格：成長型
+  risk_profile: "中高風險"           # 風險偏好
+
+# 目標配置 - 根據當前持股設定合理區間
+target_allocation:
+  # 產業配置目標（百分比範圍）
+  sectors:
+    Technology: [45%, 60%]          # 科技股（目前 ~52%）- U, INTC, PINS, GOOGL, TSLA, MBLY
+    Industrials: [12%, 20%]         # 工業/物流（目前 ~14%）- UPS, ALK, AMRZ
+    FinTech: [4%, 10%]              # 金融科技（目前 ~5%）- UPST
+    Consumer: [3%, 8%]              # 消費/休閒（目前 ~4%）- MTN, DKNG
+    Healthcare: [2%, 8%]            # 醫療保健（目前 ~2%）- OSCR, OPCH
+    Others: [0%, 5%]                # 其他
+
+  # 資產類型配置
+  asset_types:
+    stocks: [75%, 85%]              # 股票倉位（目前 ~79%）
+    cash: [15%, 25%]                # 現金倉位（目前 ~22%）- 保持彈性
+
+  # 市值配置目標（根據持股調整）
+  market_cap:
+    large_cap: [15%, 25%]           # 大型股 >$200B (GOOGL, TSLA)
+    mid_cap: [50%, 65%]             # 中型股 $10B-$200B (U, INTC, PINS, UPS 等)
+    small_cap: [15%, 30%]           # 小型股 <$10B (AMRZ, UPST, MBLY 等)
+
+# 風險管理限制（根據實際持股設定）
+position_limits:
+  max_single_stock: 18%             # 單一持股上限（目前最大是 GOOGL 15.7%）
+  max_sector_concentration: 60%    # 單一產業上限（科技股集中度高）
+  min_positions: 10                 # 最少持股檔數（目前 13 檔）
+  max_positions: 20                 # 最多持股檔數（避免過度分散）
+  min_cash_reserve: 15%             # 最低現金儲備
+  max_portfolio_beta: 1.4           # 投資組合最大貝他值（成長型可接受較高波動）
+
+# 績效比較基準
+benchmarks:
+  primary: "^IXIC"                  # 主要基準：NASDAQ（科技股為主）
+  secondary:                        # 次要基準
+    - "^GSPC"                       # S&P 500
+    - "^SOX"                        # 費城半導體指數（追蹤 INTC, MBLY）
+    - "^DJI"                        # Dow Jones
+
+# 再平衡設定
+rebalancing:
+  frequency: "quarterly"            # 檢查頻率：每季檢視
+  threshold: 5%                     # 偏離閾值：超過目標配置 ±5% 時考慮再平衡
+  next_review_date: "2026-03-01"   # 下次再平衡檢視日期
+  auto_rebalance: false             # 不自動再平衡，需人工確認
+  triggers:                         # 觸發再平衡的條件
+    - "單一持股超過 18%"
+    - "科技股超過 60%"
+    - "現金低於 15%"
+
+# 績效目標（成長型投資組合）
+performance_targets:
+  annual_return: 15%                # 年化報酬目標（成長型，高於大盤）
+  max_drawdown: -20%                # 可接受最大回撤（成長股波動較大）
+  sharpe_ratio: 1.0                 # 目標夏普比率
+  win_rate: 60%                     # 目標勝率（獲利股票比例）
+
+# 選擇權策略管理
+options_strategy:
+  primary_strategy: "Covered Call"  # 主要策略：持股 Covered Call
+  max_coverage: 50%                 # 最多覆蓋 50% 持股
+  min_premium: 1%                   # 最低權利金收益率
+  dte_range: [14, 45]               # 到期日範圍：14-45 天
+  target_delta: [0.2, 0.35]         # 目標 Delta 範圍（價外）

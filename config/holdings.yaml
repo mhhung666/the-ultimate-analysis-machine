@@ -1,13 +1,22 @@
 # 投資組合持股配置
 # 最後更新：2025-12-04
 #
-# 可自訂追蹤持股，新增或移除股票無需修改程式碼
+# 用途：
+# 1. 給爬蟲程式使用 - 定義要抓取價格與新聞的股票清單
+# 2. 給 Claude CLI 分析 - 計算持股配置、損益、風險等
 #
-# fetch_news: true/false - 控制該股票是否爬取新聞
-# enabled: true/false - 控制該股票是否啟用（用於暫停某些股票而不刪除配置）
+# 關鍵欄位說明：
+# - symbol: 股票代號
+# - shares: 持股數量
+# - cost: 平均成本價
+# - current_price: 當前價格（由爬蟲自動更新）
+# - position: 佔投資組合比例
+# - fetch_news: true/false - 控制該股票是否爬取新聞（控制爬蟲行為）
+# - enabled: true/false - 控制該股票是否啟用追蹤（暫停某些股票而不刪除配置）
+#
+# 可自訂追蹤持股，新增或移除股票無需修改程式碼
 
 holdings:
-  # 核心持倉
   核心持倉:
     Unity Software:
       symbol: "U"
@@ -81,7 +90,15 @@ holdings:
       cost: $298.88
       current_price: $455.00
 
-  # 一般持倉
+    Oracle:
+      symbol: "ORCL"
+      fetch_news: true
+      enabled: true
+      position: 7.2%
+      shares: 100
+      cost: $191.51
+      current_price: $191.51
+
   一般持倉:
     Vail Resorts:
       symbol: "MTN"
@@ -128,7 +145,6 @@ holdings:
       cost: $17.00
       current_price: $11.70
 
-  # 小倉位 / 其他
   小倉位:
     Stoneweg Europe Trust:
       symbol: "SET.SI"
@@ -149,21 +165,19 @@ holdings:
       cost: $35.01
       current_price: $34.00
 
-  # 選擇權部位
   選擇權部位:
-    # 持股相關選擇權
     Upstart (UPST):
       symbol: "UPST"
       options:
         - type: "Sell Call"
           quantity: -1
-          strike: $50.00
-          expiry: "2025-12-12"
+          strike: $52.00
+          expiry: "2025-12-19"
           status: "價外安全"
         - type: "Sell Call"
           quantity: -2
-          strike: $52.00
-          expiry: "2025-12-12"
+          strike: $54.00
+          expiry: "2025-12-19"
           status: "價外安全"
 
     United Parcel Service (UPS):
@@ -221,44 +235,22 @@ holdings:
           expiry: "2025-12-19"
           status: "價外安全"
 
-    # 無持股選擇權
     DraftKings (DKNG):
       symbol: "DKNG"
-      fetch_news: true
-      enabled: true
       options:
         - type: "Sell Call"
           quantity: -1
-          strike: $37.00
-          expiry: "2025-12-12"
+          strike: $37.50
+          expiry: "2025-12-19"
           status: "價外安全"
 
-    Alphabet (GOOG):
-      symbol: "GOOG"
-      options:
-        - type: "Sell Call"
-          quantity: -1
-          strike: $330.00
-          expiry: "2025-12-12"
-          status: "價外安全"
-
-# 觀察清單 - 非持股但想追蹤的股票
 watchlist:
-  # 觀察清單說明：
-  # 這些股票不是你的持股，但你想追蹤其新聞和價格走勢
-  # fetch_news: true - 會抓取新聞並在持倉分析中顯示觀察清單分析
-  # enabled: true - 啟用追蹤
+  # 觀察清單：
+  # 這些股票不是你的持股，但想追蹤其新聞和價格走勢
 
   潛在投資標的:
-    # 範例：可以加入你想關注的股票
-    # NVIDIA:
-    #   symbol: "NVDA"
-    #   fetch_news: true
-    #   enabled: true
-    #   note: "關注 AI 晶片市場動向"
-    #
-    Oracle:
-      symbol: "ORCL"
+    Broadcom:
+      symbol: "AVGO"
       fetch_news: true
       enabled: true
-      note: "關注雲端業務成長"
+      note: "關注 AI 晶片與半導體市場"

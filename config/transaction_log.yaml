@@ -1,0 +1,96 @@
+# 交易記錄日誌
+#
+# 用途：
+# - 給 Claude CLI 分析 - 計算已實現損益、交易勝率、換手率、選擇權策略績效
+#
+# 使用說明：
+# - 每次交易後新增一筆記錄
+# - 按時間倒序排列（最新的在最上方）
+# - 記錄完整交易資訊（價格、數量、損益等）
+#
+# 交易類型 (action)：
+# - BUY: 買入股票
+# - SELL: 賣出股票
+# - SELL_TO_OPEN: 賣出選擇權開倉（如 Covered Call）
+# - BUY_TO_CLOSE: 買入選擇權平倉
+# - DIVIDEND: 股息收入
+# - OPTION_EXERCISE: 選擇權履約
+# - OPTION_EXPIRE: 選擇權到期
+
+# 股票交易記錄
+stock_transactions:
+  # 2024 年交易記錄
+  # - date: "2024-11-20"
+  #   action: "BUY"
+  #   symbol: "TSLA"
+  #   shares: 20
+  #   price: $298.88
+  #   total_amount: $5,977.60
+  #   commission: $0.00
+  #   note: "首次建倉"
+
+  # - date: "2024-10-15"
+  #   action: "SELL"
+  #   symbol: "AAPL"
+  #   shares: 100
+  #   price: $178.50
+  #   cost_basis: $165.00        # 原始成本
+  #   total_proceeds: $17,850.00
+  #   commission: $0.00
+  #   realized_pnl: $1,350.00    # 已實現損益
+  #   note: "獲利了結，重新配置"
+
+# 選擇權交易記錄
+option_transactions:
+  # - date: "2024-12-01"
+  #   action: "SELL_TO_OPEN"     # 賣出開倉
+  #   symbol: "UPST"
+  #   contract: "UPST 2025-12-12 C50"
+  #   quantity: -1
+  #   premium: $1.20
+  #   total_premium: $120.00
+  #   commission: $0.65
+  #   strategy: "Covered Call"
+  #   status: "Open"
+
+  # - date: "2024-11-15"
+  #   action: "BUY_TO_CLOSE"     # 買入平倉
+  #   symbol: "UPST"
+  #   contract: "UPST 2024-11-15 C45"
+  #   quantity: 1
+  #   premium: $0.05
+  #   total_cost: $5.00
+  #   commission: $0.65
+  #   strategy: "Covered Call"
+  #   status: "Closed"
+  #   realized_pnl: $114.35      # 原始賣出 $120 - 買回 $5 - 手續費 $0.65
+
+# 股息記錄
+dividend_records:
+  # - date: "2024-12-01"
+  #   symbol: "UPS"
+  #   amount: $150.00
+  #   shares: 100
+  #   dividend_per_share: $1.50
+  #   type: "Qualified"          # Qualified 或 Ordinary
+  #   reinvested: false
+
+# 公司行動記錄（股票分割、合併等）
+corporate_actions:
+  # - date: "2024-08-15"
+  #   symbol: "NVDA"
+  #   action: "SPLIT"
+  #   ratio: "10:1"
+  #   shares_before: 100
+  #   shares_after: 1000
+  #   note: "10 股分割為 1 股"
+
+# 交易統計摘要（可由程式自動計算）
+# statistics:
+#   total_trades: 0
+#   total_buy_trades: 0
+#   total_sell_trades: 0
+#   total_realized_pnl: $0.00
+#   total_dividends: $0.00
+#   avg_holding_period_days: 0
+#   win_rate: 0%

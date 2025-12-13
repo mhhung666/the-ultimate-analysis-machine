@@ -1,7 +1,14 @@
 # 全球主要市場指數配置
-# 可自訂追蹤市場，新增或移除指數無需修改程式碼
 #
-# fetch_news: true/false - 控制該指數是否爬取新聞
+# 用途：
+# 1. 給爬蟲程式使用 - 定義要抓取價格與新聞的市場指數清單
+# 2. 給 Claude CLI 分析 - 了解大盤走勢與市場情緒
+#
+# 關鍵欄位說明：
+# - symbol: 市場指數代號（Yahoo Finance 格式，如 ^GSPC, ^IXIC）
+# - fetch_news: true/false - 控制該指數是否爬取新聞（控制爬蟲行為）
+#
+# 可自訂追蹤市場，新增或移除指數無需修改程式碼
 
 global_indices:
   # 亞洲市場
@@ -24,7 +31,7 @@ global_indices:
   台灣:
     台灣加權指數:
       symbol: "^TWII"
-      fetch_news: false
+      fetch_news: true
 
   中國:
     上證指數:
@@ -54,7 +61,7 @@ global_indices:
   歐洲:
     STOXX 50:
       symbol: "^STOXX50E"
-      fetch_news: false
+      fetch_news: true
     德國DAX:
       symbol: "^GDAXI"
       fetch_news: false

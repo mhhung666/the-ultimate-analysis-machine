@@ -1,23 +1,41 @@
 # 投資組合績效追蹤
-# 記錄不同時間點的資產統計，方便計算績效表現
+#
+# 用途：
+# - 給 Claude CLI 分析 - 計算報酬率、追蹤績效變化、分析風險指標
 #
 # 使用說明：
-# - 每次更新帳戶資訊時，新增一筆記錄到 snapshots 列表
+# - 每日更新：新增一筆快照到 snapshots 列表
 # - 保持時間倒序排列（最新的在最上方）
-# - 可用於計算日報酬率、週報酬率、月報酬率等
+# - 用於計算日/週/月報酬率、最大回撤等
 #
-# 欄位說明：
-# - net_liquidation: 淨清算價值（帳戶總價值，含現金+股票）- 最重要的績效指標
+# 關鍵欄位說明：
+# - date: 快照日期
+# - net_liquidation: 淨清算價值（帳戶總價值 = 現金 + 持股市值）⭐ 最重要的績效指標
 # - stock_value: 持股市值（所有股票按市價計算的總價值）
 # - cash_balance: 現金餘額（可用現金）
 # - equity_with_loan: 含貸款權益值（淨值 + 借貸額度）
 # - buying_power: 購買力（可用於交易的最大金額，含槓桿）
 # - available_funds: 可用資金（不含槓桿的可用金額）
 # - maintenance_margin: 維持保證金（券商要求的最低保證金）
-# - cushion: 保證金緩衝比率（距離追繳保證金的安全距離，越高越安全）
+# - cushion: 保證金緩衝比率（距離追繳保證金的安全距離，0-1 之間，越高越安全）
+#
+# 績效計算公式：
+# - 日報酬率 = (今日 net_liquidation - 昨日 net_liquidation) / 昨日 net_liquidation × 100%
+# - 總報酬率 = (當前 net_liquidation - 初始資金) / 初始資金 × 100%
 
 snapshots:
   # 最新資料
+  - date: "2025-12-13"
+    net_liquidation: $264,079.47      # 帳戶總價值
+    stock_value: $227,956.34          # 持股市值（含選擇權部位）
+    cash_balance: $38,891.48          # 現金餘額
+    equity_with_loan: $265,421.63     # 含貸款權益值
+    buying_power: $807,155.10         # 購買力（含槓桿）
+    available_funds: $201,788.77      # 可用資金
+    maintenance_margin: $59,697.37    # 維持保證金
+    cushion: 0.779024                 # 保證金緩衝 77.9%（非常安全）
+    note: "新增 ORCL 持股，12/12 到期選擇權已結算"
+
   - date: "2025-12-05"
     net_liquidation: $265,799.23      # 帳戶總價值
     stock_value: $210,673.52          # 持股市值
@@ -29,20 +47,7 @@ snapshots:
     cushion: 0.795747                 # 保證金緩衝 79.57%（非常安全）
     note: "初始快照"
 
-  # 範例：下一次更新時新增一筆記錄
-  # - date: "2025-12-06"
-  #   net_liquidation: $XXX,XXX.XX
-  #   stock_value: $XXX,XXX.XX
-  #   cash_balance: $XX,XXX.XX
-  #   equity_with_loan: $XXX,XXX.XX
-  #   buying_power: $XXX,XXX.XX
-  #   available_funds: $XXX,XXX.XX
-  #   maintenance_margin: $XX,XXX.XX
-  #   cushion: 0.XXXXXX
-  #   note: "每日更新"
-
 # 績效計算參考
-# - 日報酬率 = (今日 net_liquidation - 昨日 net_liquidation) / 昨日 net_liquidation * 100%
 # - 週報酬率 = (本週 net_liquidation - 上週 net_liquidation) / 上週 net_liquidation * 100%
 # - 月報酬率 = (本月 net_liquidation - 上月 net_liquidation) / 上月 net_liquidation * 100%
 # - 年化報酬率 = ((當前 net_liquidation / 初始 net_liquidation) ^ (365 / 持有天數) - 1) * 100%
