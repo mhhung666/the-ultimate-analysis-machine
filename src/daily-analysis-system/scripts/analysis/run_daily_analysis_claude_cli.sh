@@ -190,6 +190,44 @@ cleanup() {
     rm -f "${MARKET_PROMPT_FILE}" "${HOLDINGS_PROMPT_FILE}"
 }
 
+# Claude API 重試機制
+# 參數: $1=prompt_file, $2=output_file, $3=analysis_name
+claude_with_retry() {
+    local prompt_file="$1"
+    local output_file="$2"
+    local analysis_name="$3"
+    local max_retries=3
+    local retry_delay=10
+    local attempt=1
+
+    while [ $attempt -le $max_retries ]; do
+        if [ $attempt -gt 1 ]; then
+            echo -e "${YELLOW}   ⏳ 重試 $attempt/$max_retries (等待 ${retry_delay}秒...)${NC}"
+            sleep $retry_delay
+        fi
+
+        if cat "${prompt_file}" | "${CLAUDE_BIN}" > "${output_file}" 2>&1; then
+            # 檢查輸出文件是否有實際內容 (>100 bytes)
+            if [ -s "${output_file}" ] && [ $(wc -c < "${output_file}") -gt 100 ]; then
+                return 0
+            else
+                echo -e "${YELLOW}   ⚠️  輸出文件過小，可能失敗${NC}" >&2
+            fi
+        fi
+
+        # 檢查是否有連線錯誤
+        if grep -q "Connection error\|API Error" "${output_file}" 2>/dev/null; then
+            echo -e "${YELLOW}   ⚠️  連線錯誤: $(head -1 "${output_file}")${NC}" >&2
+        fi
+
+        attempt=$((attempt + 1))
+        retry_delay=$((retry_delay * 2))  # 指數退避
+    done
+
+    echo -e "${RED}   ❌ ${analysis_name}失敗 (已重試 $max_retries 次)${NC}" >&2
+    return 1
+}
+
 ###############################################################################
 # Step 2: 個股分析報告生成
 ###############################################################################
@@ -373,7 +411,7 @@ EOF
 
         # 調用 Claude 生成個股分析
         echo -e "${YELLOW}   ⏳ 分析 ${symbol}...${NC}"
-        if cat "${stock_prompt_file}" | "${CLAUDE_BIN}" > "${stock_analysis_file}" 2>&1; then
+        if claude_with_retry "${stock_prompt_file}" "${stock_analysis_file}" "${symbol}個股分析"; then
             echo -e "${GREEN}   ✅ ${symbol} 分析完成${NC}"
             count=$((count + 1))
         else
@@ -691,7 +729,7 @@ run_market_analysis() {
 
     mkdir -p "${REPORTS_DIR}"
 
-    if cat "${MARKET_PROMPT_FILE}" | "${CLAUDE_BIN}" > "${MARKET_ANALYSIS_OUTPUT}" 2>&1; then
+    if claude_with_retry "${MARKET_PROMPT_FILE}" "${MARKET_ANALYSIS_OUTPUT}" "市場分析"; then
         echo -e "${GREEN}   ✅ 市場分析完成!${NC}"
         echo -e "${GREEN}   📄 ${MARKET_ANALYSIS_OUTPUT}${NC}"
         echo ""
@@ -949,7 +987,7 @@ run_holdings_analysis() {
 
     mkdir -p "${REPORTS_DIR}"
 
-    if cat "${HOLDINGS_PROMPT_FILE}" | "${CLAUDE_BIN}" > "${HOLDINGS_ANALYSIS_OUTPUT}" 2>&1; then
+    if claude_with_retry "${HOLDINGS_PROMPT_FILE}" "${HOLDINGS_ANALYSIS_OUTPUT}" "持倉分析"; then
         echo -e "${GREEN}   ✅ 持倉分析完成!${NC}"
         echo -e "${GREEN}   📄 ${HOLDINGS_ANALYSIS_OUTPUT}${NC}"
         echo ""
