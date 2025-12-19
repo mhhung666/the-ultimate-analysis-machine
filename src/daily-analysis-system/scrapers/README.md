@@ -234,7 +234,41 @@ python3 scrapers/fetch_market_news.py "^HSI"
 - 每個股票/指數通常返回約 10 則最新新聞
 - 免費使用，無需 API key
 
-## 4. 持倉股票價格爬蟲 (`fetch_holdings_prices.py`)
+---
+
+## 4. Barron's 訊號爬蟲 (`fetch_barrons_signals.py`)
+
+抓取 Barron's 股票推薦並輸出到 `output/market-data/{YEAR}/Signals/`。
+
+```bash
+# 抓取 Barron's 推薦 (預設 10 筆)
+python3 scrapers/fetch_barrons_signals.py
+
+# 使用 Makefile
+make fetch-barrons
+
+# 指定輸出路徑
+python3 scrapers/fetch_barrons_signals.py -o output/market-data/2025/Signals/barrons-2025-12-19.md
+
+# 強制覆蓋輸出
+python3 scrapers/fetch_barrons_signals.py --force
+```
+
+**參數:**
+- `-l, --limit`: 最高筆數 (預設 10)
+- `--days`: 視窗天數 (預設 7)
+- `--force`: 即使內容相同仍覆蓋輸出
+
+**認證:**
+- 若遇到 401 Forbidden，請在環境變數設定 `BARRONS_COOKIE`（可從瀏覽器已登入的 Cookie 取得）
+
+---
+
+## 5. OpenInsider 內部人交易 (由 `fetch_all_news.py` 自動附加)
+
+`fetch_all_news.py` 會在抓取 Yahoo News 後，針對持股與觀察清單股票附加 OpenInsider 近 7 天交易到同一個 Markdown 檔案最後。
+
+## 6. 持倉股票價格爬蟲 (`fetch_holdings_prices.py`)
 
 從 [portfolio/2025/holdings.md](../../../portfolio/2025/holdings.md) 自動提取股票代碼，並從 Yahoo Finance 獲取當天的即時價格資訊。
 

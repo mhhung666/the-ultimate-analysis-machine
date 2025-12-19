@@ -24,6 +24,7 @@ help:
 	@echo "  make fetch-global   - Fetch global market indices"
 	@echo "  make fetch-holdings - Fetch holdings prices"
 	@echo "  make fetch-news     - Fetch market news for configured symbols"
+	@echo "  make fetch-barrons  - Fetch Barron's signals"
 	@echo "  make fetch-all      - Run all scrapers"
 	@echo ""
 	@echo "  make analyze-daily  - Run Claude CLI daily analysis"
@@ -63,6 +64,9 @@ fetch-holdings: install
 
 fetch-news: install
 	cd $(DAS_DIR) && $(PYTHON_BIN) scrapers/fetch_all_news.py
+
+fetch-barrons: install
+	cd $(DAS_DIR) && $(PYTHON_BIN) scrapers/fetch_barrons_signals.py
 
 fetch-all: install
 	@echo "Running all scrapers..."
@@ -143,4 +147,4 @@ deploy: update-pages commit-auto push
 	@echo ""
 	@echo "Check your GitHub Pages site in 1-2 minutes!"
 
-.PHONY: help venv install test clean clean-venv fetch-global fetch-holdings fetch-news fetch-all analyze-daily daily clean-old-reports update-pages preview-pages commit commit-auto push deploy
+.PHONY: help venv install test clean clean-venv fetch-global fetch-holdings fetch-news fetch-barrons fetch-all analyze-daily daily clean-old-reports update-pages preview-pages commit commit-auto push deploy
