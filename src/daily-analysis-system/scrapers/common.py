@@ -42,6 +42,34 @@ def get_repo_root() -> Path:
     return get_project_root().parent.parent
 
 
+def load_env_file(env_path: Optional[Path] = None) -> None:
+    """
+    載入 .env 檔案到環境變數（僅處理 KEY=VALUE 格式）
+
+    Args:
+        env_path: 指定 .env 路徑，預設為 repo 根目錄的 .env
+    """
+    if env_path is None:
+        env_path = get_repo_root() / ".env"
+
+    if not env_path.exists():
+        return
+
+    try:
+        with env_path.open("r", encoding="utf-8") as f:
+            for line in f:
+                raw = line.strip()
+                if not raw or raw.startswith("#") or "=" not in raw:
+                    continue
+                key, value = raw.split("=", 1)
+                key = key.strip()
+                value = value.strip().strip('"').strip("'")
+                if key and key not in os.environ:
+                    os.environ[key] = value
+    except OSError:
+        return
+
+
 def get_config_directory() -> Path:
     """
     取得配置檔所在目錄
