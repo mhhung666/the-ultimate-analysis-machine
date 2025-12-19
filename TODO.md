@@ -2,6 +2,13 @@
 
 ## 🎯 高優先級
 
+### 爬蟲整合（最高優先）
+- [ ] **整合 stock-info-crawler 輸出到 daily-analysis-system**
+  - 規劃 `output/market-data/{YEAR}/` 子目錄（如 `News/`, `Signals/`）以便分類 raw data
+  - Barrons：輸出 `barrons-YYYY-MM-DD.md`（近 7 天），若今日無新檔則跳過分析
+  - OpenInsider：只抓持股+觀察清單，近 7 天交易，內容附加到同日新聞 markdown 最後
+  - 更新 `scripts/analysis/run_daily_analysis_claude_cli.sh` 以支援新資料來源與跳過規則
+
 ### 文檔優化
 - [ ] **整併環境設定文件**
   - 將 `src/daily-analysis-system/ENV_SETUP_GUIDE.md` 內容合併到 `QUICKSTART.md`
