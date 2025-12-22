@@ -12,7 +12,7 @@
 metadata:
   inception_date: "2025-12-05"      # 投資組合起始日期（開始追蹤績效的日期）
   initial_capital: $265,799.23      # 初始資金（2025-12-05 淨清算價值）
-  current_capital: $264,079.47      # 當前資金（2025-12-13 淨清算價值）
+  current_capital: $265,661.05      # 當前資金（2025-12-22 淨清算價值）
   base_currency: "USD"              # 基準貨幣
   account_type: "Interactive Brokers" # 券商帳戶類型
   investment_style: "成長型"         # 投資風格：成長型
@@ -22,12 +22,12 @@ metadata:
 target_allocation:
   # 產業配置目標（百分比範圍）
   sectors:
-    Technology: [45%, 60%]          # 科技股（目前 ~52%）- U, INTC, PINS, GOOGL, TSLA, MBLY
-    Industrials: [12%, 20%]         # 工業/物流（目前 ~14%）- UPS, ALK, AMRZ
+    Technology: [45%, 60%]          # 科技股（目前 ~52%）- U, INTC, PINS, GOOGL, TSLA, MBLY, ORCL
+    Industrials: [12%, 20%]         # 工業/物流（目前 ~14%）- UPS, AMRZ
     FinTech: [4%, 10%]              # 金融科技（目前 ~5%）- UPST
     Consumer: [3%, 8%]              # 消費/休閒（目前 ~4%）- MTN, DKNG
-    Healthcare: [2%, 8%]            # 醫療保健（目前 ~2%）- OSCR, OPCH
-    Others: [0%, 5%]                # 其他
+    Healthcare: [2%, 8%]            # 醫療保健（目前 ~2%）- OSCR
+    Others: [0%, 5%]                # 其他 - SET
 
   # 資產類型配置
   asset_types:

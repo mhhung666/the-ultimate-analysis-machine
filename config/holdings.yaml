@@ -1,5 +1,5 @@
 # 投資組合持股配置
-# 最後更新：2025-12-04
+# 最後更新：2025-12-22
 #
 # 用途：
 # 1. 給爬蟲程式使用 - 定義要抓取價格與新聞的股票清單
@@ -109,14 +109,6 @@ holdings:
       cost: $163.76
       current_price: $144.36
 
-    Alaska Air Group:
-      symbol: "ALK"
-      fetch_news: true
-      enabled: true
-      position: 1.9%
-      shares: 100
-      cost: $40.00
-      current_price: $49.65
 
     Oscar Health:
       symbol: "OSCR"
@@ -127,14 +119,6 @@ holdings:
       cost: $18.50
       current_price: $16.77
 
-    Option Care Health:
-      symbol: "OPCH"
-      fetch_news: false
-      enabled: true
-      position: 1.1%
-      shares: 100
-      cost: $28.01
-      current_price: $29.89
 
     Mobileye:
       symbol: "MBLY"
@@ -170,78 +154,50 @@ holdings:
       symbol: "UPST"
       options:
         - type: "Sell Call"
-          quantity: -1
+          quantity: -2
           strike: $52.00
-          expiry: "2025-12-19"
+          expiry: "2025-12-26"
+          avg_cost: $33.58
           status: "價外安全"
-        - type: "Sell Call"
-          quantity: -2
-          strike: $54.00
-          expiry: "2025-12-19"
-          status: "價外安全"
-
-    United Parcel Service (UPS):
-      symbol: "UPS"
-      options:
-        - type: "Sell Put"
-          quantity: -1
-          strike: $90.00
-          expiry: "2025-12-19"
-          status: "價外安全"
-        - type: "Sell Call"
-          quantity: -1
-          strike: $105.00
-          expiry: "2025-12-19"
-          status: "價外安全"
-
-    Alaska Air (ALK):
-      symbol: "ALK"
-      options:
-        - type: "Sell Put"
-          quantity: -2
-          strike: $37.50
-          expiry: "2025-12-19"
-          status: "價外安全"
-        - type: "Sell Call"
-          quantity: -1
-          strike: $47.50
-          expiry: "2025-12-19"
-          status: "價內風險"
 
     Oscar Health (OSCR):
       symbol: "OSCR"
       options:
         - type: "Sell Call"
           quantity: -2
-          strike: $18.00
-          expiry: "2025-12-19"
-          status: "價外安全"
+          strike: $19.00
+          expiry: "2026-01-16"
+          avg_cost: $22.33
+          status: "價內風險"
 
     Option Care Health (OPCH):
       symbol: "OPCH"
       options:
-        - type: "Sell Call"
+        - type: "Sell Put"
           quantity: -1
           strike: $30.00
-          expiry: "2025-12-19"
-          status: "價內"
+          expiry: "2026-01-16"
+          avg_cost: $54.98
+          status: "價內風險"
 
-    Amrize (AMRZ):
-      symbol: "AMRZ"
+    Alphabet (GOOGL):
+      symbol: "GOOGL"
       options:
         - type: "Sell Call"
-          quantity: -2
-          strike: $55.00
-          expiry: "2025-12-19"
-          status: "價外安全"
+          quantity: -1
+          strike: $320.00
+          expiry: "2025-12-26"
+          avg_cost: $28.04
+          status: "價內風險"
 
     DraftKings (DKNG):
       symbol: "DKNG"
       options:
         - type: "Sell Call"
           quantity: -1
-          strike: $37.50
-          expiry: "2025-12-19"
+          strike: $38.00
+          expiry: "2026-01-09"
+          avg_cost: $27.23
           status: "價外安全"
 
 watchlist:

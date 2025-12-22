@@ -25,6 +25,17 @@
 
 snapshots:
   # 最新資料
+  - date: "2025-12-22"
+    net_liquidation: $265,661.05      # 帳戶總價值
+    stock_value: $219,262.21          # 持股市值（含選擇權部位）
+    cash_balance: $46,882.90          # 現金餘額
+    equity_with_loan: $265,861.95     # 含貸款權益值
+    buying_power: $823,854.86         # 購買力（含槓桿）
+    available_funds: $205,963.72      # 可用資金
+    maintenance_margin: $55,887.83    # 維持保證金
+    cushion: 0.790384                 # 保證金緩衝 79.0%（非常安全）
+    note: "12/19 選擇權到期結算，調整部分持倉"
+
   - date: "2025-12-13"
     net_liquidation: $264,079.47      # 帳戶總價值
     stock_value: $227,956.34          # 持股市值（含選擇權部位）
