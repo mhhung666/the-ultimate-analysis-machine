@@ -41,6 +41,8 @@ htmlcov/
 
 # 環境變數
 .env
+!.env.example
+!.env.docker
 
 # 輸出數據
 src/daily-analysis-system/output/

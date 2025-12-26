@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  analysis-scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: daily-analysis-scheduler
+    restart: unless-stopped
+
+    # 環境變數
+    environment:
+      # Claude Code OAuth Token
+      - CLAUDE_CODE_OAUTH_TOKEN=${CLAUDE_CODE_OAUTH_TOKEN}
+      - CLAUDE_TOKEN=${CLAUDE_TOKEN}
+
+      # Git 設定 (用於自動 commit)
+      - GIT_USER_NAME=${GIT_USER_NAME:-Daily Analysis Bot}
+      - GIT_USER_EMAIL=${GIT_USER_EMAIL:-bot@example.com}
+
+      # Gitea 設定 (如果需要推送到 Gitea)
+      - GITEA_USERNAME=${GITEA_USERNAME}
+      - GITEA_PASSWORD=${GITEA_PASSWORD}
+      - GITEA_REPO_URL=${GITEA_REPO_URL}
+
+      # 時區設定
+      - TZ=Asia/Taipei
+
+      # Cron 排程時間 (預設每天晚上 9 點)
+      - CRON_SCHEDULE=${CRON_SCHEDULE:-0 21 * * *}
+
+    # 掛載 volumes
+    volumes:
+      # 程式碼目錄 (如果需要在本機編輯)
+      - .:/app
+
+      # 持久化資料目錄
+      - ./src/daily-analysis-system/data:/app/src/daily-analysis-system/data
+      - ./src/daily-analysis-system/reports:/app/src/daily-analysis-system/reports
+      - ./docs:/app/docs
+
+      # logs 目錄
+      - ./logs:/app/logs
+
+      # Git 設定 (保留 git commit 歷史)
+      - ./.git:/app/.git
+
+    # 網路設定
+    networks:
+      - analysis-network
+
+networks:
+  analysis-network:
+    driver: bridge
