@@ -12,11 +12,11 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # 安裝 Claude CLI
-# 下載並安裝 Claude CLI binary
-RUN mkdir -p ~/.local/bin && \
-    wget -q https://cdn.anthropic.com/claude-cli/claude-linux-x64 -O ~/.local/bin/claude && \
-    chmod +x ~/.local/bin/claude && \
-    ln -s ~/.local/bin/claude /usr/local/bin/claude || true
+# 使用官方安裝腳本
+RUN curl -fsSL https://claude.ai/install.sh | bash
+
+# 設定 PATH 環境變數,確保 claude 可以被找到
+ENV PATH="/root/.local/bin:${PATH}"
 
 # 設定工作目錄
 WORKDIR /app
