@@ -4,15 +4,19 @@ FROM python:3.11-slim
 RUN apt-get update && apt-get install -y \
     git \
     curl \
+    wget \
     cron \
     make \
     jq \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-# 安裝 Claude CLI (Node.js + Claude Code)
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
-    apt-get install -y nodejs && \
-    npm install -g @anthropic-ai/claude-code-cli
+# 安裝 Claude CLI
+# 下載並安裝 Claude CLI binary
+RUN mkdir -p ~/.local/bin && \
+    wget -q https://cdn.anthropic.com/claude-cli/claude-linux-x64 -O ~/.local/bin/claude && \
+    chmod +x ~/.local/bin/claude && \
+    ln -s ~/.local/bin/claude /usr/local/bin/claude || true
 
 # 設定工作目錄
 WORKDIR /app
