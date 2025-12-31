@@ -8,11 +8,14 @@
 import sys
 import yaml
 from fetch_market_news import fetch_market_news
+from openinsider_trades import fetch_openinsider_markdown
 from common import (
     print_status,
     print_error,
     safe_exit,
     get_config_directory,
+    generate_dated_filename,
+    setup_output_path,
 )
 
 
@@ -150,6 +153,26 @@ def main():
             )
 
             if success:
+                if item_type in ("stock", "watchlist"):
+                    news_filename = generate_dated_filename(symbol, "md")
+                    news_path = setup_output_path(
+                        output_arg=news_filename,
+                        default_filename=news_filename,
+                        default_subdir="News",
+                        use_stdout=False,
+                    )
+                    insider_section = fetch_openinsider_markdown(symbol, days=7, max_items=25)
+                    if insider_section and news_path:
+                        existing = ""
+                        try:
+                            with open(news_path, "r", encoding="utf-8") as f:
+                                existing = f.read()
+                        except OSError:
+                            existing = ""
+                        if "OpenInsider 內部人交易" not in existing:
+                            with open(news_path, "a", encoding="utf-8") as f:
+                                f.write("\n")
+                                f.write(insider_section)
                 success_count += 1
                 print_status(f"  ✓ 完成\n")
             else:
