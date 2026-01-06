@@ -81,9 +81,9 @@ print_header() {
     echo -e "${GREEN}📅 分析日期: ${TODAY}${NC}"
     echo ""
     echo -e "${YELLOW}📋 分析流程:${NC}"
-    echo -e "${GREEN}  Step 1: 市場分析 → 了解全球市場環境 [Opus 4.5 + 連網查證]${NC}"
-    echo -e "${GREEN}  Step 2: 個股分析 → 深入分析個別股票 [Sonnet 4.5]${NC}"
-    echo -e "${GREEN}  Step 3: 持倉分析 → 評估投資組合表現 [Sonnet 4.5]${NC}"
+    echo -e "${GREEN}  Step 1: 市場分析 → 了解全球市場環境${NC}"
+    echo -e "${GREEN}  Step 2: 個股分析 → 深入分析個別股票${NC}"
+    echo -e "${GREEN}  Step 3: 持倉分析 → 評估投資組合表現${NC}"
     echo ""
 }
 
@@ -191,29 +191,14 @@ cleanup() {
 }
 
 # Claude API 重試機制
-# 參數: $1=prompt_file, $2=output_file, $3=analysis_name, $4=model (optional), $5=enable_web_search (optional)
+# 參數: $1=prompt_file, $2=output_file, $3=analysis_name
 claude_with_retry() {
     local prompt_file="$1"
     local output_file="$2"
     local analysis_name="$3"
-    local model="${4:-}"  # 可選的模型參數
-    local enable_web_search="${5:-false}"  # 可選的連網搜尋參數
     local max_retries=3
     local retry_delay=10
     local attempt=1
-
-    # 建立 Claude 命令
-    local claude_cmd="${CLAUDE_BIN} --print"
-
-    # 如果指定了模型，添加 --model 參數
-    if [[ -n "${model}" ]]; then
-        claude_cmd="${claude_cmd} --model ${model}"
-    fi
-
-    # 如果啟用連網搜尋，添加 WebSearch 工具和權限略過
-    if [[ "${enable_web_search}" == "true" ]]; then
-        claude_cmd="${claude_cmd} --tools Bash,Read,Write,Edit,Glob,Grep,WebSearch,WebFetch --dangerously-skip-permissions"
-    fi
 
     while [ $attempt -le $max_retries ]; do
         if [ $attempt -gt 1 ]; then
@@ -221,7 +206,7 @@ claude_with_retry() {
             sleep $retry_delay
         fi
 
-        if cat "${prompt_file}" | eval ${claude_cmd} > "${output_file}" 2>&1; then
+        if cat "${prompt_file}" | "${CLAUDE_BIN}" > "${output_file}" 2>&1; then
             # 檢查輸出文件是否有實際內容 (>100 bytes)
             if [ -s "${output_file}" ] && [ $(wc -c < "${output_file}") -gt 100 ]; then
                 return 0
@@ -503,19 +488,12 @@ ${news_content}"
 3. **產業輪動分析**: 分析資金流向和產業表現
 4. **風險與機會**: 識別當前市場風險和投資機會
 5. **後市展望**: 提供未來一週的市場展望
-6. **資訊查證**: **重要!** 使用 WebSearch 工具連網查證關鍵資訊的準確性,特別是:
-   - 重要經濟數據的最新公佈值
-   - 重大新聞事件的背景和後續發展
-   - 公司財報或重大公告的詳細內容
-   - 市場數據的最新狀態(如 VIX、黃金價格等)
-   - 任何你不確定或需要補充資訊的內容
 
 ### 報告風格:
 - 專業但易懂
 - 數據驅動,洞察為先
 - 結構清晰,重點突出
 - 避免模糊建議,提供具體方向
-- **所有經過連網查證的資訊,請在分析中註明 "[已查證]" 標記**
 
 ---
 
@@ -731,14 +709,12 @@ ${news_data}
 
 ---
 
-**分析引擎**: Claude Opus 4.5 (含連網查證功能)
-**報告版本**: v3.0
-**特色功能**: 本報告使用 Opus 4.5 模型,並透過連網搜尋查證關鍵資訊的準確性
+**分析引擎**: Claude (Sonnet 4.5)
+**報告版本**: v2.1
 
 ---
 
 請直接開始生成完整的市場分析報告,從標題開始,不要有任何前置說明或詢問。
-記得在分析過程中,主動使用 WebSearch 工具查證重要資訊!
 EOF
 
     echo -e "${GREEN}   ✅ 市場分析 Prompt 已生成${NC}"
@@ -747,14 +723,13 @@ EOF
 
 # 執行市場分析
 run_market_analysis() {
-    echo -e "${BLUE}🧠 調用 Claude Opus 4.5 進行市場分析 (含連網查證功能)...${NC}"
+    echo -e "${BLUE}🧠 調用 Claude 進行市場分析...${NC}"
     echo -e "${YELLOW}   這可能需要幾分鐘,請稍候...${NC}"
     echo ""
 
     mkdir -p "${REPORTS_DIR}"
 
-    # 使用 Opus 4.5 模型,並啟用連網搜尋功能
-    if claude_with_retry "${MARKET_PROMPT_FILE}" "${MARKET_ANALYSIS_OUTPUT}" "市場分析" "opus" "true"; then
+    if claude_with_retry "${MARKET_PROMPT_FILE}" "${MARKET_ANALYSIS_OUTPUT}" "市場分析"; then
         echo -e "${GREEN}   ✅ 市場分析完成!${NC}"
         echo -e "${GREEN}   📄 ${MARKET_ANALYSIS_OUTPUT}${NC}"
         echo ""
