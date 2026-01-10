@@ -1,5 +1,5 @@
 # 投資組合持股配置
-# 最後更新：2025-12-22
+# 最後更新：2026-01-11
 #
 # 用途：
 # 1. 給爬蟲程式使用 - 定義要抓取價格與新聞的股票清單
@@ -23,8 +23,8 @@ holdings:
       fetch_news: true
       enabled: true
       position: 14.2%
-      shares: 820
-      cost: $50.39
+      shares: 500
+      cost: $44.69
       current_price: $45.78
 
     Intel:
@@ -50,9 +50,10 @@ holdings:
       fetch_news: true
       enabled: true
       position: 5.0%
-      shares: 500
-      cost: $33.60
+      shares: 0
+      cost: $0.00
       current_price: $26.75
+      note: "僅有選擇權部位"
 
     Upstart:
       symbol: "UPST"
@@ -109,25 +110,15 @@ holdings:
       cost: $163.76
       current_price: $144.36
 
-
-    Oscar Health:
-      symbol: "OSCR"
-      fetch_news: false
-      enabled: true
-      position: 1.3%
-      shares: 200
-      cost: $18.50
-      current_price: $16.77
-
-
-    Mobileye:
-      symbol: "MBLY"
+    Shopify:
+      symbol: "SHOP"
       fetch_news: true
       enabled: true
-      position: 0.9%
-      shares: 200
-      cost: $17.00
-      current_price: $11.70
+      position: 0.0%
+      shares: 0
+      cost: $0.00
+      current_price: $0.00
+      note: "有選擇權部位"
 
   小倉位:
     Stoneweg Europe Trust:
@@ -150,26 +141,6 @@ holdings:
       current_price: $34.00
 
   選擇權部位:
-    Upstart (UPST):
-      symbol: "UPST"
-      options:
-        - type: "Sell Call"
-          quantity: -2
-          strike: $52.00
-          expiry: "2025-12-26"
-          avg_cost: $33.58
-          status: "價外安全"
-
-    Oscar Health (OSCR):
-      symbol: "OSCR"
-      options:
-        - type: "Sell Call"
-          quantity: -2
-          strike: $19.00
-          expiry: "2026-01-16"
-          avg_cost: $22.33
-          status: "價內風險"
-
     Option Care Health (OPCH):
       symbol: "OPCH"
       options:
@@ -178,27 +149,135 @@ holdings:
           strike: $30.00
           expiry: "2026-01-16"
           avg_cost: $54.98
-          status: "價內風險"
+          localSymbol: "OPCH  260116P00030000"
+
+    Intel (INTC):
+      symbol: "INTC"
+      options:
+        - type: "Sell Call"
+          quantity: -2
+          strike: $49.00
+          expiry: "2026-01-16"
+          avg_cost: $54.30
+          localSymbol: "INTC  260116C00049000"
+
+    Amrize (AMRZ):
+      symbol: "AMRZ"
+      options:
+        - type: "Sell Call"
+          quantity: -2
+          strike: $60.00
+          expiry: "2026-01-16"
+          avg_cost: $20.33
+          localSymbol: "AMRZ  260116C00060000"
+
+    DraftKings (DKNG):
+      symbol: "DKNG"
+      options:
+        - type: "Sell Put"
+          quantity: -1
+          strike: $35.00
+          expiry: "2026-01-16"
+          avg_cost: $59.30
+          localSymbol: "DKNG  260116P00035000"
+        - type: "Sell Call"
+          quantity: -1
+          strike: $38.00
+          expiry: "2026-01-16"
+          avg_cost: $20.30
+          localSymbol: "DKNG  260116C00038000"
+
+    Netflix (NFLX):
+      symbol: "NFLX"
+      options:
+        - type: "Sell Put"
+          quantity: -1
+          strike: $860.00
+          expiry: "2026-01-16"
+          avg_cost: $44.49
+          localSymbol: "NFLX  260116P00086000"
+
+    Upstart (UPST):
+      symbol: "UPST"
+      options:
+        - type: "Sell Call"
+          quantity: -1
+          strike: $53.00
+          expiry: "2026-01-16"
+          avg_cost: $82.20
+          localSymbol: "UPST  260116C00053000"
+        - type: "Sell Put"
+          quantity: -1
+          strike: $48.00
+          expiry: "2026-01-16"
+          avg_cost: $92.95
+          localSymbol: "UPST  260116P00048000"
+
+    Oracle (ORCL):
+      symbol: "ORCL"
+      options:
+        - type: "Sell Call"
+          quantity: -1
+          strike: $210.00
+          expiry: "2026-01-16"
+          avg_cost: $89.30
+          localSymbol: "ORCL  260116C00210000"
+
+    United Parcel Service (UPS):
+      symbol: "UPS"
+      options:
+        - type: "Sell Call"
+          quantity: -1
+          strike: $112.00
+          expiry: "2026-01-16"
+          avg_cost: $31.30
+          localSymbol: "UPS   260116C00112000"
+        - type: "Sell Put"
+          quantity: -1
+          strike: $96.00
+          expiry: "2026-01-16"
+          avg_cost: $60.23
+          localSymbol: "UPS   260116P00096000"
+
+    Pinterest (PINS):
+      symbol: "PINS"
+      options:
+        - type: "Sell Put"
+          quantity: -2
+          strike: $26.00
+          expiry: "2026-01-16"
+          avg_cost: $24.30
+          localSymbol: "PINS  260116P00026000"
+
+    Shopify (SHOP):
+      symbol: "SHOP"
+      options:
+        - type: "Sell Put"
+          quantity: -1
+          strike: $157.50
+          expiry: "2026-01-16"
+          avg_cost: $156.20
+          localSymbol: "SHOP  260116P00157500"
 
     Alphabet (GOOGL):
       symbol: "GOOGL"
       options:
         - type: "Sell Call"
           quantity: -1
-          strike: $320.00
-          expiry: "2025-12-26"
-          avg_cost: $28.04
-          status: "價內風險"
+          strike: $350.00
+          expiry: "2026-01-16"
+          avg_cost: $43.95
+          localSymbol: "GOOGL 260116C00350000"
 
-    DraftKings (DKNG):
-      symbol: "DKNG"
+    Palantir (PLTR):
+      symbol: "PLTR"
       options:
-        - type: "Sell Call"
+        - type: "Sell Put"
           quantity: -1
-          strike: $38.00
-          expiry: "2026-01-09"
-          avg_cost: $27.23
-          status: "價外安全"
+          strike: $165.00
+          expiry: "2026-01-16"
+          avg_cost: $129.23
+          localSymbol: "PLTR  260116P00165000"
 
 watchlist:
   # 觀察清單：

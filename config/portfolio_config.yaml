@@ -12,7 +12,7 @@
 metadata:
   inception_date: "2025-12-05"      # 投資組合起始日期（開始追蹤績效的日期）
   initial_capital: $265,799.23      # 初始資金（2025-12-05 淨清算價值）
-  current_capital: $265,661.05      # 當前資金（2025-12-22 淨清算價值）
+  current_capital: $274,044.06      # 當前資金（2026-01-11 淨清算價值）
   base_currency: "USD"              # 基準貨幣
   account_type: "Interactive Brokers" # 券商帳戶類型
   investment_style: "成長型"         # 投資風格：成長型
