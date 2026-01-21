@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>投資組合分析 - 2026-01-13 | The Ultimate Analysis System</title>
+    <title>投資組合分析 - 2026-01-21 | The Ultimate Analysis System</title>
     <meta name="description" content="Markdown 報告自動轉換的 Holdings Analysis">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -28,10 +28,10 @@
             <div>
                 <p class="eyebrow">Holdings Analysis</p>
                 <h1>投資組合分析</h1>
-                <p class="hero-note">更新於 2026-01-13</p>
+                <p class="hero-note">更新於 2026-01-21</p>
                 <div class="hero-meta">
-                    <span class="pill">📅 2026-01-13</span>
-                    <span class="pill pill-ghost">🕐 2026-01-13 10:58 CST+0800</span>
+                    <span class="pill">📅 2026-01-21</span>
+                    <span class="pill pill-ghost">🕐 2026-01-21 12:32 CST+0800</span>
                     <span class="pill pill-outline">📊 Holdings Analysis</span>
                 </div>
             </div>
@@ -51,13 +51,13 @@
 <tbody>
 <tr>
 <td>總資產淨值</td>
-<td>$274,044.06</td>
+<td>$274,044.06 (1/11快照)</td>
 <td>-</td>
 </tr>
 <tr>
 <td>股票市值</td>
 <td>$195,167.90 (71.2%)</td>
-<td>🟡</td>
+<td>🟢</td>
 </tr>
 <tr>
 <td>現金餘額</td>
@@ -65,21 +65,23 @@
 <td>🟢</td>
 </tr>
 <tr>
-<td>未實現損益</td>
-<td>-$7,826.10 (<span class="status-negative">-2.8%</span>)</td>
-<td>🔴</td>
+<td>保證金緩衝</td>
+<td>78.4%</td>
+<td>🟢 非常安全</td>
 </tr>
 <tr>
-<td>近期變化</td>
-<td><span class="status-positive">+3.2%</span> (自12/22)</td>
+<td>近期報酬 (1/11 vs 12/22)</td>
+<td>+$8,383.01 (<span class="status-positive">+3.16%</span>)</td>
 <td>🟢</td>
 </tr>
 </tbody>
 </table></div>
-<p><strong>關鍵提示</strong>: 投組整體表現穩健,本月上漲3.2%。1/16(本週四)有13個選擇權部位到期需密切關注,INTC與UPST今日大跌需評估選擇權風險。</p>
+<p><strong>關鍵提示</strong>: 今日市場普遍下跌 (88%股票收紅),但 1/16 選擇權已於上週到期結算,目前無緊迫選擇權風險。INTC 逆勢上漲 <span class="status-positive">+3.34%</span> 是今日亮點。</p>
 <hr>
 <h2 id="選擇權部位">🎯 選擇權部位</h2>
-<p><strong>到期日: 2026-01-16 (本週四,僅剩3天)</strong></p>
+<h3 id="到期狀態確認">⚠️ 到期狀態確認</h3>
+<p>根據資料,所有選擇權到期日為 <strong>2026-01-16</strong>,該日期已過 (今日為 1/21)。這些選擇權應已結算完畢。</p>
+<h3 id="結算分析-回顧-116-到期部位">結算分析 (回顧 1/16 到期部位)</h3>
 <div class="table-wrapper"><table>
 <thead>
 <tr>
@@ -87,175 +89,160 @@
 <th>類型</th>
 <th>數量</th>
 <th>行權價</th>
-<th>當前價</th>
-<th>價差</th>
-<th>狀態</th>
-<th>處理建議</th>
+<th>1/21現價</th>
+<th>結算狀態</th>
+<th>損益預估</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>OPCH</td>
+<td>Sell Put</td>
+<td>-1</td>
+<td>$30.00</td>
+<td>$35.79</td>
+<td>🟢 價外到期</td>
+<td>權利金入袋</td>
+</tr>
+<tr>
 <td>INTC</td>
-<td>Call</td>
+<td>Sell Call</td>
 <td>-2</td>
 <td>$49.00</td>
-<td>$44.06</td>
-<td>-$4.94</td>
-<td>🟢 價外</td>
-<td>安全,將歸零收權利金</td>
+<td>$48.56</td>
+<td>🟢 價外到期</td>
+<td>權利金入袋</td>
 </tr>
 <tr>
 <td>AMRZ</td>
-<td>Call</td>
+<td>Sell Call</td>
 <td>-2</td>
 <td>$60.00</td>
-<td>$57.71</td>
-<td>-$2.29</td>
-<td>🟢 價外</td>
-<td>安全,將歸零收權利金</td>
+<td>$52.93</td>
+<td>🟢 價外到期</td>
+<td>權利金入袋</td>
 </tr>
 <tr>
 <td>DKNG</td>
-<td>Put</td>
+<td>Sell Put</td>
 <td>-1</td>
 <td>$35.00</td>
-<td>$34.96</td>
-<td>+$0.04</td>
-<td>🟡 接近價內</td>
-<td><strong>警戒</strong>,可能被指派100股</td>
+<td>$32.25</td>
+<td>🔴 價內</td>
+<td>可能被指派</td>
 </tr>
 <tr>
 <td>DKNG</td>
-<td>Call</td>
+<td>Sell Call</td>
 <td>-1</td>
 <td>$38.00</td>
-<td>$34.96</td>
-<td>-$3.04</td>
-<td>🟢 價外</td>
-<td>安全</td>
+<td>$32.25</td>
+<td>🟢 價外到期</td>
+<td>權利金入袋</td>
 </tr>
 <tr>
 <td>NFLX</td>
-<td>Put</td>
+<td>Sell Put</td>
 <td>-1</td>
 <td>$860.00</td>
-<td>$894.10</td>
-<td>-$34.10</td>
-<td>🟢 價外</td>
-<td>安全(註:價格顯示異常,需確認)</td>
+<td>$87.26*</td>
+<td>⚠️ 需確認</td>
+<td>價格異常</td>
 </tr>
 <tr>
 <td>UPST</td>
-<td>Call</td>
+<td>Sell Call</td>
 <td>-1</td>
 <td>$53.00</td>
-<td>$45.25</td>
-<td>-$7.75</td>
-<td>🟢 價外</td>
-<td>安全,但股價大跌-7.88%</td>
+<td>$44.61</td>
+<td>🟢 價外到期</td>
+<td>權利金入袋</td>
 </tr>
 <tr>
 <td>UPST</td>
-<td>Put</td>
+<td>Sell Put</td>
 <td>-1</td>
 <td>$48.00</td>
-<td>$45.25</td>
-<td>+$2.75</td>
+<td>$44.61</td>
 <td>🔴 價內</td>
-<td><strong>高風險</strong>,極可能被指派100股</td>
+<td>可能被指派</td>
 </tr>
 <tr>
 <td>ORCL</td>
-<td>Call</td>
+<td>Sell Call</td>
 <td>-1</td>
 <td>$210.00</td>
-<td>$204.68</td>
-<td>-$5.32</td>
-<td>🟢 價外</td>
-<td>安全</td>
+<td>$179.92</td>
+<td>🟢 價外到期</td>
+<td>權利金入袋</td>
 </tr>
 <tr>
 <td>UPS</td>
-<td>Call</td>
+<td>Sell Call</td>
 <td>-1</td>
 <td>$112.00</td>
-<td>$108.03</td>
-<td>-$3.97</td>
-<td>🟢 價外</td>
-<td>安全</td>
+<td>$106.54</td>
+<td>🟢 價外到期</td>
+<td>權利金入袋</td>
 </tr>
 <tr>
 <td>UPS</td>
-<td>Put</td>
+<td>Sell Put</td>
 <td>-1</td>
 <td>$96.00</td>
-<td>$108.03</td>
-<td>-$11.03</td>
-<td>🟢 價外</td>
-<td>安全</td>
+<td>$106.54</td>
+<td>🟢 價外到期</td>
+<td>權利金入袋</td>
 </tr>
 <tr>
 <td>PINS</td>
-<td>Put</td>
+<td>Sell Put</td>
 <td>-2</td>
 <td>$26.00</td>
-<td>$26.82</td>
-<td>-$0.82</td>
-<td>🟢 價外</td>
-<td>安全</td>
+<td>$25.39</td>
+<td>🔴 價內</td>
+<td>可能被指派</td>
 </tr>
 <tr>
 <td>SHOP</td>
-<td>Put</td>
+<td>Sell Put</td>
 <td>-1</td>
 <td>$157.50</td>
-<td>$167.93</td>
-<td>-$10.43</td>
-<td>🟢 價外</td>
-<td>安全</td>
+<td>$144.50</td>
+<td>🔴 價內</td>
+<td>可能被指派</td>
 </tr>
 <tr>
 <td>GOOGL</td>
-<td>Call</td>
+<td>Sell Call</td>
 <td>-1</td>
 <td>$350.00</td>
-<td>$331.86</td>
-<td>-$18.14</td>
-<td>🟢 價外</td>
-<td>安全</td>
+<td>$322.00</td>
+<td>🟢 價外到期</td>
+<td>權利金入袋</td>
 </tr>
 <tr>
 <td>PLTR</td>
-<td>Put</td>
+<td>Sell Put</td>
 <td>-1</td>
 <td>$165.00</td>
-<td>$179.41</td>
-<td>-$14.41</td>
-<td>🟢 價外</td>
-<td>安全</td>
-</tr>
-<tr>
-<td>OPCH</td>
-<td>Put</td>
-<td>-1</td>
-<td>$30.00</td>
-<td>$32.06</td>
-<td>-$2.06</td>
-<td>🟢 價外</td>
-<td>安全</td>
+<td>$168.53</td>
+<td>🟢 價外到期</td>
+<td>權利金入袋</td>
 </tr>
 </tbody>
 </table></div>
+<p>*NFLX 價格 $87.26 可能有誤,Netflix 應在 $800+ 價位</p>
 <p><strong>重點關注</strong>:
-- 🔴 <strong>UPST $48 Put</strong>: 價內$2.75,到期將被指派100股成本$4,800,需準備現金或允許指派
-- 🟡 <strong>DKNG $35 Put</strong>: 僅價外$0.04,極度接近價內,需每日監控,可能被指派100股成本$3,500
-- 🟢 <strong>其餘11個部位</strong>: 均安全價外,將順利歸零收取權利金</p>
-<p><strong>行動建議</strong>:
-1. UPST: 今日暴跌-7.88%,建議週三前評估是否buy to close或接受指派
-2. DKNG: 密切監控,若跌破$35可考慮提前平倉避免指派
-3. 現金充足($80,591),足以應付UPST+DKNG潛在指派($8,300)</p>
+- 🔴 <strong>可能被指派的部位</strong> (需確認帳戶變動):
+  - DKNG Sell Put $35: 現價 $32.25,可能被指派 100 股 @ $35
+  - UPST Sell Put $48: 現價 $44.61,可能被指派 100 股 @ $48
+  - PINS Sell Put $26: 現價 $25.39,可能被指派 200 股 @ $26
+  - SHOP Sell Put $157.50: 現價 $144.50,可能被指派 100 股 @ $157.50
+- ✅ 大部分 Sell Call 部位安全到期</p>
 <hr>
 <h2 id="持股狀況">📈 持股狀況</h2>
+<h3 id="持股總覽-按倉位排序">持股總覽 (按倉位排序)</h3>
 <div class="table-wrapper"><table>
 <thead>
 <tr>
@@ -263,12 +250,11 @@
 <th>持股</th>
 <th>成本</th>
 <th>現價</th>
-<th>未實現損益</th>
-<th>市值</th>
+<th>損益</th>
 <th>倉位</th>
 <th>今日</th>
 <th>選擇權</th>
-<th>評估</th>
+<th>建議</th>
 </tr>
 </thead>
 <tbody>
@@ -276,272 +262,265 @@
 <td>GOOGL</td>
 <td>130</td>
 <td>$267.98</td>
-<td>$331.86</td>
-<td>+$8,304 (<span class="status-positive">+23.8%</span>)</td>
-<td>$43,142</td>
+<td>$322.00</td>
+<td><span class="status-positive">+20.2%</span></td>
 <td>15.7%</td>
-<td><span class="status-positive">+1.00%</span></td>
-<td>-1 Call</td>
-<td>🟢 持有</td>
+<td>🔴 <span class="status-negative">-2.42%</span></td>
+<td>已到期</td>
+<td>持有</td>
 </tr>
 <tr>
 <td>U</td>
 <td>500</td>
 <td>$44.69</td>
-<td>$47.29</td>
-<td>+$1,300 (<span class="status-positive">+5.8%</span>)</td>
-<td>$23,645</td>
-<td>8.6%</td>
-<td><span class="status-positive">+5.89%</span></td>
+<td>$41.54</td>
+<td><span class="status-negative">-7.1%</span></td>
+<td>14.2%</td>
+<td>🟢 <span class="status-positive">+1.44%</span></td>
 <td>無</td>
-<td>🟢 持有</td>
+<td>觀察</td>
 </tr>
 <tr>
 <td>INTC</td>
 <td>800</td>
 <td>$45.82</td>
-<td>$44.06</td>
-<td>-$1,408 (<span class="status-negative">-3.8%</span>)</td>
-<td>$35,248</td>
-<td>12.9%</td>
-<td><span class="status-negative">-3.27%</span></td>
-<td>-2 Call</td>
-<td>🔴 關注</td>
+<td>$48.56</td>
+<td><span class="status-positive">+6.0%</span></td>
+<td>12.5%</td>
+<td>🟢 <span class="status-positive">+3.34%</span></td>
+<td>已到期</td>
+<td>持有</td>
 </tr>
 <tr>
 <td>AMRZ</td>
 <td>400</td>
 <td>$53.08</td>
-<td>$57.71</td>
-<td>+$1,852 (<span class="status-positive">+8.7%</span>)</td>
-<td>$23,084</td>
-<td>8.4%</td>
-<td><span class="status-positive">+0.68%</span></td>
-<td>-2 Call</td>
-<td>🟢 持有</td>
+<td>$52.93</td>
+<td><span class="status-negative">-0.3%</span></td>
+<td>8.3%</td>
+<td>🔴 <span class="status-negative">-2.93%</span></td>
+<td>已到期</td>
+<td>持有</td>
 </tr>
 <tr>
 <td>ORCL</td>
 <td>100</td>
 <td>$191.51</td>
-<td>$204.68</td>
-<td>+$1,317 (<span class="status-positive">+6.9%</span>)</td>
-<td>$20,468</td>
-<td>7.5%</td>
-<td><span class="status-positive">+3.10%</span></td>
-<td>-1 Call</td>
-<td>🟢 持有</td>
+<td>$179.92</td>
+<td><span class="status-negative">-6.1%</span></td>
+<td>7.2%</td>
+<td>🔴 <span class="status-negative">-5.85%</span></td>
+<td>已到期</td>
+<td>觀察</td>
 </tr>
 <tr>
 <td>UPST</td>
 <td>300</td>
 <td>$49.67</td>
-<td>$45.25</td>
-<td>-$1,326 (<span class="status-negative">-8.9%</span>)</td>
-<td>$13,575</td>
-<td>5.0%</td>
-<td><span class="status-negative">-7.88%</span></td>
-<td>-1C -1P</td>
-<td>🔴 警戒</td>
+<td>$44.61</td>
+<td><span class="status-negative">-10.2%</span></td>
+<td>5.3%</td>
+<td>🔴 <span class="status-negative">-7.29%</span></td>
+<td>已到期</td>
+<td>觀察</td>
 </tr>
 <tr>
 <td>UPS</td>
 <td>100</td>
 <td>$92.00</td>
-<td>$108.03</td>
-<td>+$1,603 (<span class="status-positive">+17.4%</span>)</td>
-<td>$10,803</td>
-<td>3.9%</td>
-<td><span class="status-negative">-0.03%</span></td>
-<td>-1C -1P</td>
-<td>🟢 持有</td>
+<td>$106.54</td>
+<td><span class="status-positive">+15.8%</span></td>
+<td>3.6%</td>
+<td>🔴 <span class="status-negative">-0.35%</span></td>
+<td>已到期</td>
+<td>持有</td>
 </tr>
 <tr>
 <td>TSLA</td>
 <td>20</td>
 <td>$298.88</td>
-<td>$448.96</td>
-<td>+$3,002 (<span class="status-positive">+50.2%</span>)</td>
-<td>$8,979</td>
-<td>3.3%</td>
-<td><span class="status-positive">+0.89%</span></td>
+<td>$419.25</td>
+<td><span class="status-positive">+40.3%</span></td>
+<td>3.4%</td>
+<td>🔴 <span class="status-negative">-4.18%</span></td>
 <td>無</td>
-<td>🟢 持有</td>
+<td>持有</td>
 </tr>
 <tr>
 <td>MTN</td>
 <td>50</td>
 <td>$163.76</td>
-<td>$141.00</td>
-<td>-$1,138 (<span class="status-negative">-13.9%</span>)</td>
-<td>$7,050</td>
-<td>2.6%</td>
-<td><span class="status-positive">+2.33%</span></td>
+<td>$140.60</td>
+<td><span class="status-negative">-14.1%</span></td>
+<td>2.7%</td>
+<td>🔴 <span class="status-negative">-0.67%</span></td>
 <td>無</td>
-<td>🟡 觀察</td>
+<td>檢視</td>
 </tr>
 <tr>
 <td>DKNG</td>
 <td>100</td>
 <td>$35.01</td>
-<td>$34.96</td>
-<td>-$5 (<span class="status-negative">-0.1%</span>)</td>
-<td>$3,496</td>
+<td>$32.25</td>
+<td><span class="status-negative">-7.9%</span></td>
 <td>1.3%</td>
-<td><span class="status-negative">-0.60%</span></td>
-<td>-1C -1P</td>
-<td>🟡 關注</td>
-</tr>
-<tr>
-<td>PINS</td>
-<td>0</td>
-<td>-</td>
-<td>$26.82</td>
-<td>-</td>
-<td>$0</td>
-<td>0%</td>
-<td><span class="status-negative">-1.18%</span></td>
-<td>-2 Put</td>
-<td>🟢 僅選擇權</td>
-</tr>
-<tr>
-<td>SHOP</td>
-<td>0</td>
-<td>-</td>
-<td>$167.93</td>
-<td>-</td>
-<td>$0</td>
-<td>0%</td>
-<td><span class="status-positive">+2.10%</span></td>
-<td>-1 Put</td>
-<td>🟢 僅選擇權</td>
+<td>🔴 <span class="status-negative">-1.13%</span></td>
+<td>已到期</td>
+<td>觀察</td>
 </tr>
 </tbody>
 </table></div>
-<p><strong>今日市場表現</strong>: 11/12 上漲,漲跌參半但整體偏多</p>
-<hr>
-<h3 id="重點持股分析">重點持股分析</h3>
-<h4 id="googl-倉位157">📊 GOOGL (倉位15.7%)</h4>
+<h3 id="重點關注持股">重點關注持股</h3>
+<h4 id="orcl-oracle---今日跌幅--585">📊 ORCL (Oracle) - 今日跌幅 <span class="status-negative">-5.85%</span></h4>
 <ul>
-<li><strong>狀態</strong>: 最大持倉,報酬+23.8%表現優異,今日+1.00%持續上漲</li>
-<li><strong>選擇權</strong>: $350 Call深度價外(-$18.14),本週到期安全</li>
-<li><strong>建議</strong>: 核心持倉表現穩健,繼續持有</li>
-<li><strong>風險</strong>: 倉位偏大但科技龍頭相對安全</li>
+<li><strong>狀態</strong>: 今日重挫近 6%,從成本 $191.51 跌至 $179.92,虧損 <span class="status-negative">-6.1%</span></li>
+<li><strong>建議</strong>: 關注雲端業務與 AI 相關發展,7.2% 倉位屬中等,暫時持有觀察</li>
+<li><strong>風險</strong>: 科技股整體下跌壓力,高估值修正風險</li>
 </ul>
-<h4 id="intc-倉位129">📊 INTC (倉位12.9%)</h4>
+<h4 id="upst-upstart---今日跌幅--729">📊 UPST (Upstart) - 今日跌幅 <span class="status-negative">-7.29%</span></h4>
 <ul>
-<li><strong>狀態</strong>: 第二大持倉但虧損-3.8%,今日暴跌-3.27%,成交量1.02億異常放大</li>
-<li><strong>選擇權</strong>: $49 Call安全價外(-$4.94),但股價走弱影響未來選擇權策略</li>
-<li><strong>建議</strong>: 密切關注,若跌破$40考慮減倉或停損</li>
-<li><strong>風險</strong>: 半導體產業競爭激烈,公司轉型進展緩慢</li>
+<li><strong>狀態</strong>: 今日大跌 7.29%,持股虧損 <span class="status-negative">-10.2%</span>,若 Sell Put 被指派將再增持 100 股</li>
+<li><strong>建議</strong>: 謹慎觀察,如被指派則成本將攤平至較低水位</li>
+<li><strong>風險</strong>: Fintech 板塊波動大,經濟環境不確定性</li>
 </ul>
-<h4 id="upst-倉位50">📊 UPST (倉位5.0%)</h4>
+<h4 id="intc-intel---今日漲幅-334">📊 INTC (Intel) - 今日漲幅 <span class="status-positive">+3.34%</span></h4>
 <ul>
-<li><strong>狀態</strong>: 今日暴跌-7.88%,虧損擴大至-8.9%,成交量850萬放大</li>
-<li><strong>選擇權</strong>: 🔴 $48 Put價內$2.75,本週四極可能被指派100股</li>
-<li><strong>建議</strong>: 若接受指派,平均成本將降至$48.83(原300股@49.67 + 100股@48.00),可考慮接受</li>
-<li><strong>風險</strong>: 金融科技股波動大,FinTech監管風險</li>
+<li><strong>狀態</strong>: 逆勢上漲,從成本轉正至 <span class="status-positive">+6.0%</span>,800 股大倉位表現良好</li>
+<li><strong>建議</strong>: 持有,半導體復甦題材持續</li>
+<li><strong>風險</strong>: 與 AMD/NVIDIA 競爭壓力</li>
 </ul>
-<h4 id="tsla-倉位33">📊 TSLA (倉位3.3%)</h4>
+<h4 id="tsla-tesla---獲利最佳-403">📊 TSLA (Tesla) - 獲利最佳 <span class="status-positive">+40.3%</span></h4>
 <ul>
-<li><strong>狀態</strong>: 最佳持股,報酬+50.2%,無選擇權束縛靈活性高</li>
-<li><strong>建議</strong>: 獲利豐厚,可考慮獲利了結部分持股(如賣出10股鎖定$1,500利潤)</li>
-<li><strong>風險</strong>: 波動極大,建議設定移動停利保護獲利</li>
+<li><strong>狀態</strong>: 雖今日跌 <span class="status-negative">-4.18%</span>,但整體獲利仍達 40.3%,20 股小倉位</li>
+<li><strong>建議</strong>: 考慮部分獲利了結或持有等待</li>
+<li><strong>風險</strong>: 估值偏高,政策風險</li>
 </ul>
-<h4 id="mtn-倉位26">📊 MTN (倉位2.6%)</h4>
+<h4 id="mtn-vail-resorts---虧損--141">📊 MTN (Vail Resorts) - 虧損 <span class="status-negative">-14.1%</span></h4>
 <ul>
-<li><strong>狀態</strong>: 滑雪度假村股,虧損-13.9%但今日反彈+2.33%</li>
-<li><strong>建議</strong>: 季節性產業,冬季旺季中,若無改善考慮Q1末前出清</li>
-<li><strong>風險</strong>: 氣候變遷影響降雪量,能源成本上升</li>
-</ul>
-<h4 id="u-倉位86">📊 U (倉位8.6%)</h4>
-<ul>
-<li><strong>狀態</strong>: 今日大漲+5.89%領漲持股,成交量1,057萬放大,報酬+5.8%轉正</li>
-<li><strong>建議</strong>: 遊戲引擎龍頭,AI應用潛力大,繼續持有</li>
-<li><strong>風險</strong>: 遊戲產業週期性,Unity需證明AI變現能力</li>
-</ul>
-<h4 id="orcl-倉位75">📊 ORCL (倉位7.5%)</h4>
-<ul>
-<li><strong>狀態</strong>: 今日強勁上漲+3.10%,報酬+6.9%,成交量2,535萬放大</li>
-<li><strong>選擇權</strong>: $210 Call價外$5.32,安全</li>
-<li><strong>建議</strong>: 雲端數據庫龍頭,AI受益股,持有</li>
-<li><strong>風險</strong>: 估值偏高需留意回調風險</li>
+<li><strong>狀態</strong>: 持續虧損,從 $163.76 跌至 $140.60</li>
+<li><strong>建議</strong>: 檢視持有理由,考慮是否減碼</li>
+<li><strong>風險</strong>: 旅遊消費敏感,季節性因素</li>
 </ul>
 <hr>
 <h2 id="績效追蹤">📊 績效追蹤</h2>
-<h3 id="本月績效2026-01-11-vs-2025-12-22">本月績效（2026-01-11 vs 2025-12-22）</h3>
+<h3 id="歷史績效回顧">歷史績效回顧</h3>
 <div class="table-wrapper"><table>
 <thead>
 <tr>
-<th>指標</th>
-<th>數值</th>
-<th>評估</th>
+<th>期間</th>
+<th>起始值</th>
+<th>結束值</th>
+<th>報酬率</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>月度報酬率</td>
-<td><span class="status-positive">+3.15%</span></td>
-<td>🟢</td>
+<td>12/5 → 12/13</td>
+<td>$265,799.23</td>
+<td>$264,079.47</td>
+<td><span class="status-negative">-0.65%</span></td>
 </tr>
 <tr>
-<td>絕對收益</td>
-<td>+$8,383</td>
-<td>🟢</td>
+<td>12/13 → 12/22</td>
+<td>$264,079.47</td>
+<td>$265,661.05</td>
+<td><span class="status-positive">+0.60%</span></td>
 </tr>
 <tr>
-<td>最佳持股</td>
-<td>TSLA (<span class="status-positive">+50.2%</span>)</td>
-<td>-</td>
+<td>12/22 → 1/11</td>
+<td>$265,661.05</td>
+<td>$274,044.06</td>
+<td><span class="status-positive">+3.16%</span></td>
 </tr>
 <tr>
-<td>最差持股</td>
-<td>MTN (<span class="status-negative">-13.9%</span>)</td>
-<td>-</td>
-</tr>
-<tr>
-<td>現金增長</td>
-<td>+$33,709 (<span class="status-positive">+71.9%</span>)</td>
-<td>🟢</td>
+<td><strong>總計 (12/5 → 1/11)</strong></td>
+<td>$265,799.23</td>
+<td>$274,044.06</td>
+<td><strong><span class="status-positive">+3.10%</span></strong></td>
 </tr>
 </tbody>
 </table></div>
-<h3 id="年度績效2026-01-11-vs-2025-12-05-初始">年度績效（2026-01-11 vs 2025-12-05 初始）</h3>
+<h3 id="持倉表現排名">持倉表現排名</h3>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>排名</th>
+<th>最佳持股</th>
+<th>報酬率</th>
+<th>最差持股</th>
+<th>報酬率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>TSLA</td>
+<td><span class="status-positive">+40.3%</span></td>
+<td>MTN</td>
+<td><span class="status-negative">-14.1%</span></td>
+</tr>
+<tr>
+<td>2</td>
+<td>GOOGL</td>
+<td><span class="status-positive">+20.2%</span></td>
+<td>UPST</td>
+<td><span class="status-negative">-10.2%</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td>UPS</td>
+<td><span class="status-positive">+15.8%</span></td>
+<td>DKNG</td>
+<td><span class="status-negative">-7.9%</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td>INTC</td>
+<td><span class="status-positive">+6.0%</span></td>
+<td>U</td>
+<td><span class="status-negative">-7.1%</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td>-</td>
+<td>-</td>
+<td>ORCL</td>
+<td><span class="status-negative">-6.1%</span></td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="倉位風險評估">倉位風險評估</h3>
 <div class="table-wrapper"><table>
 <thead>
 <tr>
 <th>指標</th>
 <th>數值</th>
+<th>狀態</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>總報酬率</td>
-<td><span class="status-positive">+3.10%</span></td>
+<td>單一持股最大倉位</td>
+<td>GOOGL 15.7%</td>
+<td>🟡 中等集中</td>
 </tr>
 <tr>
-<td>絕對收益</td>
-<td>+$8,245</td>
-</tr>
-<tr>
-<td>持有天數</td>
-<td>37天</td>
-</tr>
-<tr>
-<td>年化報酬率</td>
-<td>~33.4%</td>
+<td>虧損持股數量</td>
+<td>6/10 (60%)</td>
+<td>🟡 需關注</td>
 </tr>
 <tr>
 <td>保證金緩衝</td>
-<td>78.4% (極度安全)</td>
+<td>78.4%</td>
+<td>🟢 非常安全</td>
+</tr>
+<tr>
+<td>現金比例</td>
+<td>29.4%</td>
+<td>🟢 充裕</td>
 </tr>
 </tbody>
 </table></div>
-<p><strong>績效評估</strong>: 📊 <strong>穩健成長</strong>
-- 一個月內資產淨值成長3.15%,表現良好
-- 現金部位大幅增加顯示選擇權收權利金策略成功
-- 年化報酬率約33%遠超大盤,風險控制良好(緩衝78%)
-- 持股勝率約58% (7勝5負),符合選擇權賣方策略</p>
 <hr>
 <h2 id="觀察清單分析">👀 觀察清單分析</h2>
 <h3 id="觀察標的概況">📊 觀察標的概況</h3>
@@ -552,84 +531,86 @@
 <th>當前價</th>
 <th>今日漲跌</th>
 <th>新聞情緒</th>
-<th>市值</th>
 <th>評估</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>AVGO</td>
-<td>$352.21</td>
-<td><span class="status-positive">+2.10%</span> 🟢</td>
-<td>🟢 正面</td>
-<td>$1.67T</td>
-<td>值得關注</td>
+<td>$332.60</td>
+<td>🔴 <span class="status-negative">-5.43%</span></td>
+<td>🟡 中性偏空</td>
+<td>回檔觀察</td>
 </tr>
 </tbody>
 </table></div>
 <h3 id="重點觀察標的">重點觀察標的</h3>
 <h4 id="avgo-broadcom">📌 AVGO (Broadcom)</h4>
-<p><strong>最新動態</strong>:
-- CES 2026發布新Wi-Fi 8晶片(BCM6714/BCM6719)及加速處理器BCM4918
-- Bernstein重申買入評級,列入2026年五大晶片股推薦
-- 多篇研究報告預測AVGO將在2027年前加入$3兆俱樂部(目前$1.67T)
-- 被視為AI領域可複製NVIDIA成功的潛力股之一</p>
-<p><strong>價格表現</strong>:
-- 今日上漲+2.10% ($352.21),成交量2,092萬放大
-- 近期股價$325-$400區間波動,當前處於中段
-- 從2025年$400高點回調約12%,提供較佳進場點</p>
-<p><strong>內部人交易</strong>:
-- 🔴 <strong>警示</strong>: 近期大量內部人賣出訊號
-  - CEO Hock Tan: 12/22-1/8賣出30萬股(-$1.04億)
-  - CTO Mark Brazeal: 多次賣出合計~12萬股(-$3,800萬)
-  - 董事長Henry Samueli: 12/9賣出32萬股(-$1.28億)
-- 🟢 僅CFO Harry You在12/22逆勢買入1,000股(+$325K)
-- <strong>解讀</strong>: 內部人大量賣出可能為例行性稅務規劃或獲利了結,但需謹慎</p>
-<p><strong>投資價值</strong>:
-- ✅ <strong>優勢</strong>:
-  - AI晶片領域領導者,受益於企業AI支出加速
-  - 高股息成長股(2025年股息收益率提升)
-  - 技術領先:Wi-Fi 8/網路晶片/數據中心加速器多元佈局
-  - 機構看好未來成長潛力</p>
 <ul>
-<li>⚠️ <strong>風險</strong>:</li>
-<li>估值偏高($1.67T市值),追高風險大</li>
-<li>內部人大量賣出訊號需警惕</li>
-<li>AI熱潮若降溫股價可能大幅回調</li>
-<li>半導體產業週期性風險</li>
+<li><strong>最新動態</strong>: </li>
+<li>Trump 關稅威脅與格陵蘭議題引發市場恐慌</li>
+<li>RBC 以 Sector Perform 評級啟動覆蓋,目標價 $370</li>
+<li>分析師對 AI 上行空間看好,但擔憂利潤率與估值</li>
+<li>
+<p>科技股整體遭拋售,AI 泡沫擔憂升溫</p>
+</li>
+<li>
+<p><strong>內部人交易警訊</strong>: </p>
+</li>
+<li>近期大量內部人賣出:<ul>
+<li>CEO Hock Tan: 累計賣出約 $160M+</li>
+<li>CFO Kirsten Spears: 多次賣出</li>
+<li>僅 Harry You 小額買入 $1.5M</li>
 </ul>
-<p><strong>建議</strong>: 🟡 <strong>可建小倉位,但等待更佳時機</strong>
-- 當前價格$352不算便宜,建議等待回調至$320-330區間
-- 若建倉建議倉位≤5%,可搭配賣Put策略降低成本
-- 例如:賣出1月底 $340 Put收權利金,若被指派成本更優
-- 密切關注下週Q4財報(通常3月初公布FY結果)</p>
+</li>
+<li>
+<p><strong>淨賣出金額巨大,需謹慎</strong></p>
+</li>
+<li>
+<p><strong>價格表現</strong>: </p>
+</li>
+<li>今日 <span class="status-negative">-5.43%</span>,30日 <span class="status-negative">-2.6%</span>,YTD <span class="status-negative">-4.3%</span></li>
+<li>
+<p>但 1 年報酬仍達 <span class="status-positive">+39.3%</span>,5 年約 7 倍</p>
+</li>
+<li>
+<p><strong>投資價值</strong>: </p>
+</li>
+<li>AI 晶片需求長期正面</li>
+<li>當前估值偏高,等待更好買點</li>
+<li>
+<p>$300 以下可能是更安全的進場區間</p>
+</li>
+<li>
+<p><strong>風險因素</strong>: </p>
+</li>
+<li>內部人大量賣出</li>
+<li>AI 泡沫修正風險</li>
+<li>地緣政治與關稅不確定性</li>
+</ul>
 <hr>
-<h2 id="總體建議">🎯 總體建議</h2>
-<h3 id="立即行動-本週內">立即行動 (本週內)</h3>
+<h2 id="行動建議摘要">⚠️ 行動建議摘要</h2>
+<h3 id="緊急-本週">緊急 (本週)</h3>
 <ol>
-<li>⚠️ <strong>UPST $48 Put</strong>: 週三前決定是否平倉或接受指派</li>
-<li>⚠️ <strong>DKNG $35 Put</strong>: 每日監控,跌破$35立即評估</li>
-<li>📊 <strong>INTC</strong>: 設定$40停損點,跌破考慮減倉</li>
+<li>✅ 確認 1/16 選擇權結算結果,檢查是否被指派</li>
+<li>✅ 更新帳戶淨值快照 (目前最新為 1/11)</li>
 </ol>
-<h3 id="短期策略-1-2週">短期策略 (1-2週)</h3>
+<h3 id="近期關注">近期關注</h3>
 <ol>
-<li>🎯 1/16到期後重新評估選擇權策略,當前13個部位到期釋放大量保證金</li>
-<li>💰 考慮TSLA獲利了結部分(如50%持股),鎖定$1,500利潤</li>
-<li>👀 AVGO若回調至$320-330可考慮建立3-5%倉位</li>
+<li>📊 UPST/PINS/SHOP/DKNG 如被指派,評估新倉位策略</li>
+<li>📊 ORCL 跌幅較大,關注後續走勢</li>
+<li>📊 MTN 持續虧損,考慮是否調整</li>
 </ol>
-<h3 id="中期優化-本月">中期優化 (本月)</h3>
+<h3 id="觀察清單">觀察清單</h3>
 <ol>
-<li>📈 GOOGL倉位偏高(15.7%),可考慮分批減至12%以下分散風險</li>
-<li>🔄 MTN若Q1無起色考慮出清,資金轉入成長股</li>
-<li>💵 現金充足($80K),可逢低加碼高確信度標的或增加選擇權賣方部位</li>
+<li>👀 AVGO 內部人大量賣出,等待回檔至 $300 以下再考慮</li>
 </ol>
 <hr>
 <h2 id="免責聲明">⚠️ 免責聲明</h2>
 <p>本報告僅供參考,不構成投資建議。投資有風險,請根據自身情況做出獨立決策。</p>
 <hr>
-<p><strong>分析引擎</strong>: Claude (Sonnet 4.5)<br>
-<strong>報告版本</strong>: v2.1<br>
-<strong>數據來源</strong>: Interactive Brokers, Yahoo Finance, OpenInsider</p>
+<p><strong>分析引擎</strong>: Claude (Opus 4.5)
+<strong>報告版本</strong>: v2.1</p>
             </section>
         </main>
 
